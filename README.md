@@ -56,20 +56,24 @@ User data is stored in JSON format with the following structure:
 - Previous data auto-loads on startup
 - User IDs increment automatically (u001, u002, etc.)
 
+
+
+## 🔮 Roadmap
+
+```
+🎯 Phase 2: User login system with authentication
+🎯 Phase 3: Admin dashboard to view/manage all users
+🔐 Security: Password hashing (bcrypt)
+⚡ Session management
+```
+
+---
+
 ## 👤 Author
 
 **Aryan Gupta**  
-B.Sc. Data Science & AI Student | Python Developer  
-📧 aryansynthh@gmail.com  
+B.Sc. Data Science & AI Student <br>
+📧 EMAIL: aryansynthh@gmail.com  
 💼 [LinkedIn](https://www.linkedin.com/in/aryan-rajesh-gupta-386449360)
-
-## 🔮 Next Steps
-
-- User login system with authentication
-- Admin dashboard to view/manage all users
-- Password hashing (bcrypt)
-- Session management
-
----
 
 *Learning by building. One project at a time.* 🚀
