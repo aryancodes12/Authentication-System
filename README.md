@@ -1,69 +1,75 @@
-# 🔐 Python CLI User Registration System
+# User Registration System
 
-A simple standalone **Command Line User Registration System** built using Python.
+A Python-based command-line user registration system with data persistence using JSON storage.
 
-This project allows users to register accounts with input validation and stores data locally using a JSON file.
+## 📋 Overview
 
-It is designed as a beginner-friendly backend project to practice:
-- File handling
-- JSON storage
-- Input validation
-- Modular Python structure
-- CLI application development
-
----
+A learning project building towards a complete authentication system. This is the registration module with JSON persistence, input validation, and a clean CLI interface. Part of my journey to master Python fundamentals through real-world projects.
 
 ## ✨ Features
 
-- 🧑 Register multiple users
-- 📧 Email validation
-- 🔁 Unique username checking
-- 🔒 Password rules (minimum 8 characters)
-- 🆔 Auto-generated user IDs (u001, u002, ...)
-- 💾 Persistent storage using JSON
-- 🎨 Colored terminal output support (ANSI / Rich)
+- User registration with validation (email format, unique usernames, password strength)
+- JSON-based data persistence with auto-incrementing user IDs
+- Color-coded Rich console output for better UX
+- Password confirmation and security checks
 
----
+## 🛠️ Requirements
 
-## Program flow
+- Python 3.6+ (tested on latest version)
+- Rich library
 
+## 📦 Installation
+
+1. Clone or download this repository
+
+2. Install the required dependency:
 ```bash
-
-Start
- ↓
-Load existing users (if any)
- ↓
-Register new user
- ↓
-Validate inputs
- ↓
-Generate user ID
- ↓
-Save to dictionary
- ↓
-Write to JSON file
- ↓
-Display all users
+pip install rich
 ```
 
+## 🚀 Usage
+
+```bash
+python user_registration.py
+```
+
+Follow the prompts to register users. Data automatically saves to `user_data.json`.
+
+## 💾 Data Storage
+
+User data is stored in JSON format with the following structure:
+
+```json
+{
+    "u001": {
+        "Name": "John Doe",
+        "Email": "john@example.com",
+        "Username": "johndoe",
+        "Password": "password123"
+    }
+}
+```
+
+## ⚠️ Important Notes
+
+- **Security**: Passwords stored in plain text (educational purposes only)
+- Previous data auto-loads on startup
+- User IDs increment automatically (u001, u002, etc.)
+
+## 👤 Author
+
+**Aryan Gupta**  
+B.Sc. Data Science & AI Student | Python Developer  
+📧 aryansynthh@gmail.com  
+💼 [LinkedIn](https://www.linkedin.com/in/aryan-rajesh-gupta-386449360)
+
+## 🔮 Next Steps
+
+- User login system with authentication
+- Admin dashboard to view/manage all users
+- Password hashing (bcrypt)
+- Session management
+
 ---
 
-## 🚀 Future Improvements
-
-Ideas to enhance the system:
-- 🔐 Hash passwords (bcrypt / hashlib)
-- 🔑 Login & authentication system
-- 📧 Regex-based email validation
-- 🗄 SQLite database support
-- 🎨 Full Rich-based UI
-- 🧪 Unit testing
-- 📦 Convert into installable package
-- 🌐 API version using FastAPI/Flask
-
----
-
-## 👨‍💻 Author
-
-Aryan
-BSc Data Science & AI Student
-Learning by building real-world Python projects 🚀
+*Learning by building. One project at a time.* 🚀
