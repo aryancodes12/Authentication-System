@@ -6,7 +6,10 @@ from rich.panel import Panel
 from rich.table import Table
 from rich.progress import track
 
-os.system("clear")
+#Change according to the system are you in
+#os.system("clear") # for linux/mac
+os.system("cls") #for windows
+
 console = Console()
 #Variable
 users = {}
@@ -104,7 +107,10 @@ def register_user():
 
 #MAIN LOOP
 while True:
-    os.system("clear")
+    #Change according to the system are you in
+    #os.system("clear") # for linux/mac
+    os.system("cls") #for windows
+
     console.rule("[bold blue]Main Menu")
     console.print(
         Panel("👤 User Registration System", style = "Bold Cyan")
