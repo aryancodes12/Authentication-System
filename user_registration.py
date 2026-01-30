@@ -4,149 +4,184 @@ import os
 from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
-from rich.progress import track
 
-os.system("clear")
 console = Console()
-#Variable
-users = {}
-
-#Loading the DATA from JSON
-file_name = "user_data.json"
-try:
-    with open(file_name) as f:
-        users = json.load(f)
-except FileNotFoundError:
-    pass
-else:
-    with console.status("Loading previous Data....", spinner = "moon"):
-        time.sleep(1)
-
-#Tracking the current user id from the JSON file
-if users:
-    counter = max(int(uid[1:]) for uid in users.keys()) + 1
-else:
-    counter = 1
 
 
-#Alert messages
-def success(msg):
-    console.print(msg, style = "bold green")
+# ===============================
+# 👤 USER CLASS (single user)
+# ===============================
+class User:
+    def __init__(self, name, email, username, password):
+        self.name = name
+        self.email = email
+        self.username = username
+        self.password = password
 
-def warn(msg):
-    console.print(msg, style = "yellow")
-
-def error(msg):
-    console.print(msg, style = "bold red")
-
-#Validations
-
-def is_valid_email(email):
-    return "@" in email and "." in email
-
-def is_unique_username(username):
-    return username not in [u["Username"] for u in users.values()]
-
-#Main Function
-def register_user():
-    global counter
-
-#Name
-    console.print("Enter your First Name", style = "cyan")
-    first_name = input(">>> ").title()
-    console.print("\nEnter your Last Name", style = "cyan")
-    last_name = input(">>> ").title()
-    full_name = f"{first_name} {last_name}"
-
-#Email
-    while True:
-        console.print("\nEnter Email Id", style = "cyan")
-        email = input(">>> ")
-        if is_valid_email(email):
-            break
-        error("Invalid email")
-
-#Username
-    while True:
-        console.print("\nCreate Username", style = "cyan")
-        username = input(">>> ")
-        if is_unique_username(username):
-            break
-        warn("Username already taken")
-
-#Password
-    while True:
-        console.print("\nCreate a Password", style = "cyan")
-        password = input(">>> ")
-        if password == username:
-            warn("Password cannot match the username")
-        elif len(password) < 8:
-            error("Password must be of 8 character or more")
-        else:
-            console.print("\nConfirm the Password", style = "cyan")
-            confirm = input(">>> ")
-            if confirm == password:
-                break
-            error("Password does not match")
-
-#ADDING DATA IN DICTONARY
-    user_id = f"u{counter:03d}"
-    users[user_id] = {
-        "Name" : full_name,
-        "Email" : email,
-        "Username" : username,
-        "Password" : password
+    # convert object → dict (for JSON saving)
+    def to_dict(self):
+        return {
+            "Name": self.name,
+            "Email": self.email,
+            "Username": self.username,
+            "Password": self.password
         }
 
-    counter += 1
-    console.print("Registration Successful!", style = "bold green")
+
+# ===============================
+# 🧠 SYSTEM CLASS (whole app)
+# ===============================
+class UserSystem:
+
+    # -------- INIT (data owner) --------
+    def __init__(self):
+        self.users = {}
+        self.counter = 1
+        self.file_name = "user_data.json"
+        self.load_data()
 
 
-#MAIN LOOP
-while True:
-    os.system("clear")
-    console.rule("[bold blue]Main Menu")
-    console.print(
-        Panel("👤 User Registration System", style = "Bold Cyan")
-        )
-    console.print("\n[bold yellow]Menu[/bold yellow]")
-    console.print("1. Register User")
-    console.print("2. Exit")
-    choice = input(">>> ").lower()
-    if choice == "1":
-        register_user()
-    elif choice == "2":
-        console.print(
-            Panel("👋 Thanks for using the System!", style = "bold red")
-            )
-        break
-    else:
-        warn("Invalid Choice")
+    # -------- LOAD DATA --------
+    def load_data(self):
+        try:
+            with open(self.file_name) as f:
+                raw = json.load(f)
+
+            for uid, info in raw.items():
+                self.users[uid] = User(
+                    info["Name"],
+                    info["Email"],
+                    info["Username"],
+                    info["Password"]
+                )
+
+            if self.users:
+                self.counter = max(int(uid[1:]) for uid in self.users) + 1
+
+            with console.status("Loading previous Data....", spinner="moon"):
+                time.sleep(1)
+
+        except FileNotFoundError:
+            pass
 
 
-#DATA SAVING
-with open(file_name, "w") as f:
-    json.dump(users, f, indent = 4)
+    # -------- SAVE DATA --------
+    def save_data(self):
+        data = {uid: user.to_dict() for uid, user in self.users.items()}
 
-with console.status("Saving Data ....", spinner = "moon"):
-    time.sleep(1)
-success("Data Saved")
+        with open(self.file_name, "w") as f:
+            json.dump(data, f, indent=4)
 
-#DATA DISPLAY
-console.rule("[bold yellow] User's Information")
-table = Table(title = "Registered Users")
+        with console.status("Saving Data ....", spinner="moon"):
+            time.sleep(1)
 
-table.add_column("User ID", style = "cyan")
-table.add_column("Name", style = "green")
-table.add_column("Email", style = "yellow")
-table.add_column("Username", style = "magenta")
+        console.print("Data Saved", style="bold green")
 
-for  uid, info in users.items():
-    table.add_row(
-        uid,
-        info["Name"],
-        info["Email"],
-        info["Username"]
-     )
 
-console.print(table)
+    # -------- VALIDATIONS --------
+    def is_valid_email(self, email):
+        return "@" in email and "." in email
+
+    def is_unique_username(self, username):
+        return username not in [u.username for u in self.users.values()]
+
+
+    # -------- REGISTER USER --------
+    def register_user(self):
+
+        console.print("Enter First Name", style="cyan")
+        first = input(">>> ").title()
+
+        console.print("\nEnter Last Name", style="cyan")
+        last = input(">>> ").title()
+
+        full_name = f"{first} {last}"
+
+        # email
+        while True:
+            console.print("\nEnter Email", style="cyan")
+            email = input(">>> ")
+            if self.is_valid_email(email):
+                break
+            console.print("Invalid email", style="red")
+
+        # username
+        while True:
+            console.print("\nCreate Username", style="cyan")
+            username = input(">>> ")
+            if self.is_unique_username(username):
+                break
+            console.print("Username taken", style="yellow")
+
+        # password
+        while True:
+            console.print("\nCreate Password", style="cyan")
+            password = input(">>> ")
+
+            if len(password) < 8:
+                console.print("Min 8 characters", style="red")
+                continue
+
+            console.print("\nConfirm Password", style="cyan")
+            confirm = input(">>> ")
+
+            if password == confirm:
+                break
+
+        # create object
+        user = User(full_name, email, username, password)
+
+        uid = f"u{self.counter:03d}"
+        self.users[uid] = user
+        self.counter += 1
+
+        console.print("Registration Successful!", style="bold green")
+
+
+    # -------- DISPLAY TABLE --------
+    def display_users(self):
+        table = Table(title="Registered Users")
+
+        table.add_column("User ID", style="cyan")
+        table.add_column("Name", style="green")
+        table.add_column("Email", style="yellow")
+        table.add_column("Username", style="magenta")
+
+        for uid, user in self.users.items():
+            table.add_row(uid, user.name, user.email, user.username)
+
+        console.print(table)
+
+
+    # -------- MAIN LOOP --------
+    def run(self):
+
+        while True:
+            os.system("clear")  # change to clear for linux
+
+            console.rule("[bold blue]Main Menu")
+            console.print(Panel("👤 User Registration System"))
+
+            console.print("1. Register User")
+            console.print("2. Exit")
+
+            choice = input(">>> ")
+
+            if choice == "1":
+                self.register_user()
+
+            elif choice == "2":
+                self.save_data()
+                self.display_users()
+                break
+
+            else:
+                console.print("Invalid choice", style="yellow")
+
+
+# ===============================
+# 🚀 ENTRY POINT
+# ===============================
+if __name__ == "__main__":
+    app = UserSystem()
+    app.run()
