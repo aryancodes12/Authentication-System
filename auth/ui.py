@@ -1,5 +1,6 @@
 import time
 from rich.console import Console
+from rich.panel import Panel
 
 console = Console()
 
@@ -13,5 +14,10 @@ def error(msg):
     console.print(msg, style = "bold red")
 
 def loading(msg):
-    with console.status(msg, spinner = "moon"):
+    with console.status(msg, spinner = "star"):
         time.sleep(1)
+
+def panel(msg):
+    console.print(
+        Panel(msg, style = "blue")
+    )
