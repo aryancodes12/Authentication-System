@@ -1,6 +1,7 @@
 import time
 from rich.console import Console
 from rich.panel import Panel
+from rich.table import Table
 
 console = Console()
 
@@ -14,10 +15,31 @@ def error(msg):
     console.print(msg, style = "bold red")
 
 def loading(msg):
-    with console.status(msg, spinner = "star"):
+    with console.status(msg, spinner = "dots"):
         time.sleep(1)
 
 def panel(msg):
     console.print(
         Panel(msg, style = "blue")
     )
+
+def rule(msg):
+    console.rule(msg, style = "bold blue")
+
+def table(users):
+    table = Table(title = "\nRegistered Users")
+
+    table.add_column("User Id", style = "cyan")
+    table.add_column("Name", style = "green")
+    table.add_column("Email", style = "yellow")
+    table.add_column("Username", style = "magenta")
+
+    for uid, info in users.items():
+        table.add_row(
+            uid,
+            info["Name"],
+            info["Email"],
+            info["Username"]
+        )
+
+    return table
