@@ -1,10 +1,10 @@
 import os
 from auth.storage import load_users, save_users
 from auth.register import register_user
-from auth.ui import console, success, warn, error, loading, panel, table, rule
+from auth.ui import console, success, warn, error, status, panel, table, rule
 
 
-loading("Loading ....")
+status("Loading ....")
 users = load_users()
 if users:
     counter = max(int(u[1:]) for u in users.keys()) + 1
@@ -14,7 +14,7 @@ else:
 while True:
     os.system("clear") # for linux
     #os.system("cls") # for windows
-    panel("Authentication System")
+    panel("Authentication System", "blue")
     rule("Main Menu")
     console.print("1. Register User")
     console.print("2. Exit")
@@ -29,9 +29,9 @@ while True:
         warn("Invalid Choice")
 
 save_users(users)
-loading("Saving Data ....")
+status("Saving Data ....")
 
-panel("Data Saved")
+panel("Data Saved", "green")
 
-loading("Displaying Data ....")
+status("Displaying Data ....")
 console.print(table(users))
