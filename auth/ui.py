@@ -14,13 +14,13 @@ def warn(msg):
 def error(msg):
     console.print(msg, style = "bold red")
 
-def loading(msg):
+def status(msg):
     with console.status(msg, spinner = "dots"):
         time.sleep(1)
 
-def panel(msg):
+def panel(msg, style = "blue"):
     console.print(
-        Panel(msg, style = "blue")
+        Panel(msg, style = style)
     )
 
 def rule(msg):
