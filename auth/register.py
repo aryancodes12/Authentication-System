@@ -31,6 +31,8 @@ def register_user(users, counter):
             warn("Password cannot match Username")
         elif len(password) < 8:
             warn("Password must be of 8 character or more")
+        elif "@" not in password or "_" not in password:
+            warn("Password must include special character ('@' or '_')")
         else:
             console.print("\nConfirm the password" , style = "cyan")
             confirm = input(">>> ")
