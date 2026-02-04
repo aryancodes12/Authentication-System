@@ -1,6 +1,7 @@
 import os
 from auth.storage import load_users, save_users
 from auth.register import register_user
+from auth.login import login
 from auth.ui import console, success, warn, error, status, panel, table, rule
 
 
@@ -12,17 +13,20 @@ else:
     counter = 1
 
 while True:
-    os.system("clear") # for linux
+    # os.system("clear") # for linux
     #os.system("cls") # for windows
     panel("Authentication System", "blue")
     rule("Main Menu")
     console.print("1. Register User")
-    console.print("2. Exit")
+    console.print("2. Login")
+    console.print("3. Exit")
     choice = input(">>> ")
 
     if choice == "1":
         register_user(users, counter)
     elif choice == "2":
+        login(users)
+    elif choice == "3":
         panel("👋 Thanks for using the System!")
         break
     else:
