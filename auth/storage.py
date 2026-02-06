@@ -11,5 +11,3 @@ def load_users():
 def save_users(users):
     with open(FILE, "w") as f:
         json.dump(users, f, indent = 4)
-
-
