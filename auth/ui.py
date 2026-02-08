@@ -51,3 +51,10 @@ def display_user_table(users):
         )
 
     return table
+
+
+def dashboard_menu(user):
+    rule("Dashboard")
+    console.print(f"Welcome, {user["Name"]}", style = "bold green")
+    console.print("1. View Profile")
+    console.print("2. Logout")
