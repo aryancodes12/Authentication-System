@@ -1,25 +1,34 @@
-from .ui import console, panel, success, warn, error, status, rule
-from .validators import is_username_exist, is_email_exist, is_pass_matched
+import os
+from .ui import console, panel, success, warn, error, status, rule, page
 
 def login(users):
     rule("Login Page")
-    panel("Welcome to the Login Page")
-    while True:
-        console.print("\nEnter your username or email ('m' for Menu)")
-        username = input(">>> ").lower()
-        if username == "q":
-            break
-        if is_username_exist(username, users) or is_email_exist(username, users):
-            while True:
-                console.print("\nEnter password")
-                password = input(">>> ")
-                if is_pass_matched(password, users):
-                    panel(f"Welcome back, {username}")
-                    break
-                else:
-                    error("Incorrect password or username")
-            break
-        else:
-            error("Username not found")
-    return username
+    panel("Welcome to Login Page")
 
+    while True:
+        console.print("\nEnter your username or email ('q' to quit)")
+        identifier = input(">>> ").lower()
+
+        if identifier == "q":
+            return None
+
+        user = None
+        for u in users.values():
+            if u["Username"].lower() == identifier or u["Email"] == identifier:
+                user = u
+                break
+        if not user:
+            error("User not Found")
+            continue
+        for i in range(3, 0, -1):
+            console.print("\nEnter password")
+            password = input(">>> ")
+
+            if password == user["Password"]:
+                panel(f"Welcome back, {user['Name']}", "green")
+                return user
+            else:
+                error("Incorrect Password")
+                i -= 1
+                if i == 0:
+                    break
