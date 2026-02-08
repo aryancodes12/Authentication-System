@@ -1,9 +1,17 @@
 import time
+import os
 from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
 
 console = Console()
+
+def page():
+    #For linux
+    os.system("clear") 
+
+    #for windows
+    # os.system("cls")
 
 def success(msg):
     console.print(msg, style = "bold green")
@@ -18,15 +26,15 @@ def status(msg):
     with console.status(msg, spinner = "dots"):
         time.sleep(1)
 
-def panel(msg, style = "blue"):
+def panel(msg, title = "", style = "blue"):
     console.print(
-        Panel(msg, style = style)
+        Panel(msg, title = title, style = style)
     )
 
 def rule(msg):
     console.rule(msg, style = "bold blue")
 
-def table(users):
+def display_user_table(users):
     table = Table(title = "\nRegistered Users")
 
     table.add_column("User Id", style = "cyan")
