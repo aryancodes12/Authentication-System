@@ -1,7 +1,12 @@
 from .validators import is_valid_email, is_unique_username
-from .ui import console, success, warn, error
+from .ui import console, panel, success, warn, error, status, rule, page
 
 def register_user(users, counter):
+    page()
+    panel("Authentication System")
+    rule("Registration Page")
+    panel("Welcome to the Registration Page")
+
     console.print("Enter your First Name", style = "cyan")
     first_name = input(">>> ").title()
     console.print("\nEnter your Last Name", style = "cyan")
