@@ -46,19 +46,19 @@ A comprehensive learning project building towards a complete authentication syst
 ```
 Authentication-System/
 │
-├── auth/                      # Core authentication module
-│   ├── register.py           # User registration logic
-│   ├── storage.py            # Data persistence layer
-│   ├── ui.py                 # Console UI components
-│   └── validators.py         # Input validation functions
+├── auth/                    # All authentication code
+│   ├── dashboard.py        # User dashboard
+│   ├── login.py            # Login system
+│   ├── register.py         # Registration
+│   ├── sessions.py         # Keep users logged in
+│   ├── storage.py          # Save/load data
+│   ├── theme.py            # Colors and styles
+│   ├── ui.py               # Display components
+│   └── validators.py       # Check inputs
 │
-├── data/                      # Data storage directory
-│   └── user_data.json        # User database (auto-generated)
-│
-├── main.py                    # Application entry point
-├── requirements.txt           # Python dependencies
-├── .gitignore                # Git ignore rules
-└── README.md                  # Project documentation
+├── main.py                 # Start here!
+├── requirements.txt        # Libraries needed
+└── user_data.json          # User data storage
 ```
 
 ## 🛠️ Tech Stack
