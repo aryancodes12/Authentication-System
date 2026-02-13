@@ -66,3 +66,10 @@ def display_user_table(users):
         )
 
     return table
+
+
+#LOGO
+
+def show_logo():
+    logo = r"""
+    """
