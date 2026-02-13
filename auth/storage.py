@@ -1,6 +1,6 @@
 import json
 
-FILE = "data/user_data.json"
+FILE = "user_data.json"
 
 def load_users():
     try:
