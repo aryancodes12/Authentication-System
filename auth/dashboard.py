@@ -53,7 +53,7 @@ def show_profile(user):
 def update_profile(user):
     panel("Update Profile Info")
     old_name = user["Name"]
-    console.print(old_name)
+    console.print(f"Current Name: {old_name}\n")
     console.print("Enter new name to update")
     new_name = input(">>> ")
     if new_name:
