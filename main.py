@@ -7,6 +7,8 @@ from auth.dashboard import *
 from auth.sessions import *
 
 #startup
+clear_screen()
+animated_logo()
 status("Initializing Authentication System ...", 1.5)
 users = load_users()
 
