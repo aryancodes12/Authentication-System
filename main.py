@@ -2,19 +2,23 @@ import os
 from auth.storage import load_users, save_users
 from auth.register import register_user
 from auth.login import login
-from auth.ui import console, success, warn, error, status, panel, display_user_table, rule, page, dashboard_menu
-from auth.sessions import start_session, end_session, get_current_user, is_logged_in
+from auth.ui import *
+from auth.dashboard import *
+from auth.sessions import *
 
-
-status("Loading ....")
+#startup
+status("Initializing Authentication System ...", 1.5)
 users = load_users()
+
+#determing the userid
 if users:
     counter = max(int(u[1:]) for u in users.keys()) + 1
 else: 
     counter = 1
 
+#main loop
 while True:
-    page()
+    clear_screen()
     panel("Authentication System")
     rule("")
     menu = """
@@ -22,6 +26,8 @@ while True:
     2. Login
     3. Exit
         """
+    
+    #Menu
     panel(menu, title = "Menu")
     choice = input(">>> ")
 
@@ -29,35 +35,27 @@ while True:
         register_user(users, counter)
     elif choice == "2":
         user = login(users)
+        clear_screen()
         if user:
+            status("Starting session...", 1)
             start_session(user)
 
             while is_logged_in():
                 current = get_current_user()
+                dashboard(current)
 
-                dashboard_menu(current)
-                dash_choice = input(">>> ")
-
-                if dash_choice == "1":
-                    panel(f"Name: {current['Name']}\n" f"Email: {current['Email']}\n"
-                    f"Username: {current['Username']}")
-
-                elif dash_choice == "2":
-                    end_session()
-                    success("Logged Out successfully")
-
-                else:
-                    error("Invalid choice")
     elif choice == "3":
         panel("👋 Thanks for using the System!")
         break
     else:
-        warn("Invalid Choice")
+        warn("❌ Invalid Choice")
 
+#Saving data in JSON
+fake_loading("Saving data ")
 save_users(users)
-status("Saving Data ....")
 
 panel("Data Saved", style = "green")
 
-status("Displaying Data ....")
+#Displaying the present data from JSON
+status("Displaying Data ....", 1)
 console.print(display_user_table(users))

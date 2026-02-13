@@ -3,44 +3,59 @@ import os
 from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
+from rich.progress import track
+from .theme import *
 
 console = Console()
 
-def page():
-    #For linux
-    os.system("clear") 
+# screen Utilities
+def clear_screen():
+    time.sleep(0.2)
+    os.system("cls" if os.name == "nt" else "clear")
 
-    #for windows
-    # os.system("cls")
+def sleep(t = 1):
+    time.sleep(t)
 
+
+#success, warn, error
 def success(msg):
-    console.print(msg, style = "bold green")
+    console.print(msg, style = SUCCESS)
 
 def warn(msg):
-    console.print(msg, style = "yellow")
+    console.print(msg, style = WARNING)
 
 def error(msg):
-    console.print(msg, style = "bold red")
+    console.print(msg, style = ERROR)
 
-def status(msg):
+
+#Loading 
+def status(msg, t):
     with console.status(msg, spinner = "dots"):
-        time.sleep(1)
+        time.sleep(t)
 
-def panel(msg, title = "", style = "blue"):
+def fake_loading(msg):
+    for _ in track(range(30), description=msg):
+        time.sleep(0.02)
+
+
+#Panel and Rule
+def panel(msg, title = "", style = PANEL):
     console.print(
-        Panel(msg, title = title, style = style)
+        Panel(msg, title = title, style = style, expand= False)
     )
 
 def rule(msg):
-    console.rule(msg, style = "bold blue")
+    console.rule(msg, style = RULE)
 
+
+#Table
 def display_user_table(users):
     table = Table(title = "\nRegistered Users")
 
-    table.add_column("User Id", style = "cyan")
-    table.add_column("Name", style = "green")
-    table.add_column("Email", style = "yellow")
-    table.add_column("Username", style = "magenta")
+    table.add_column("User Id", style = SUCCESS)
+    table.add_column("Name", style = ACCENT)
+    table.add_column("Email", style = WARNING)
+    table.add_column("Username", style = PRIMARY)
 
     for uid, info in users.items():
         table.add_row(
@@ -51,10 +66,3 @@ def display_user_table(users):
         )
 
     return table
-
-
-def dashboard_menu(user):
-    rule("Dashboard")
-    console.print(f"Welcome, {user["Name"]}", style = "bold green")
-    console.print("1. View Profile")
-    console.print("2. Logout")

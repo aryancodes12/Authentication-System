@@ -1,10 +1,11 @@
 import json
 
 FILE = "data/user_data.json"
+
 def load_users():
     try:
         with open(FILE) as f:
-           return json.load(f)
+            return json.load(f)
     except FileNotFoundError:
         return {}
 

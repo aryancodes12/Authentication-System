@@ -1,12 +1,11 @@
-import os
-from .ui import console, panel, success, warn, error, status, rule, page
+from .ui import *
 
 def login(users):
-    panel("Authentication System")
-    page()
-    rule("Login Page")
+    clear_screen()
+    rule("")
     panel("Welcome to Login Page")
 
+    #Username / Email input
     while True:
         console.print("\nEnter your username or email ('q' to quit)", style="cyan")
         identifier = input(">>> ").lower()
@@ -22,12 +21,13 @@ def login(users):
         if not user:
             error("User not Found")
             continue
+
+        #Password input
         for i in range(3, 0, -1):
             console.print("\nEnter password", style="cyan")
-            password = input(">>> \n")
+            password = input(">>> ")
 
             if password == user["Password"]:
-                panel(f"Welcome back, {user['Name']}", style="green")
                 return user
             else:
                 error("Incorrect Password")
