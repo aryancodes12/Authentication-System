@@ -153,11 +153,12 @@ python main.py
 
 ### 🔄 Phase 3: User Login & Authentication
 **Status**: In Progress 🚧
-- [ ] User login system
-- [ ] Session management
-- [ ] User dashboard with profile view
-- [ ] Account settings
-- [ ] Logout functionality
+- [x] User login system
+- [x] Session management
+- [x] User dashboard with profile view
+- [x] Update Name
+- [x] Logout functionality
+- [ ] Delete account functionality
 
 ### 📋 Phase 4: Admin Dashboard
 **Status**: Planned 📅
