@@ -52,12 +52,14 @@ def show_profile(user):
     console.print(profile)
 
     panel("Enter 'q' to go back")
-    key = input(">>> ")
-    if key == "q":
-        status("Returning to dashboard", 0.6)
-        dashboard(user)
-    else:
-        error("Invalid choice")
+    while True:
+        key = input(">>> ")
+        if key == "q":
+            status("Returning to dashboard", 0.6)
+            dashboard(user)
+            break
+        else:
+            error("Invalid choice")
 
 def update_profile(user):
     clear_screen()
