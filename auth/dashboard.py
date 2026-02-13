@@ -3,6 +3,7 @@ from .theme import *
 from .sessions import *
 
 def dashboard(user):
+    clear_screen()
     rule("Dashboard")
 
     panel(f"Welcome back {user['Username']}")
@@ -23,13 +24,12 @@ def dashboard(user):
     if dash_choice == "1":
         status("\nGetting info ...", 0.5)
         show_profile(user)
-        sleep(2)
     elif dash_choice == "2":
         update_profile(user)
-        sleep(1.5)
+        status("Returning to dashboard", 0.6)
     elif dash_choice == "3":
         delete_profile(user)
-        sleep(1.5)
+        status("Returning to dashboard", 0.6)
     elif dash_choice == "4":
         end_session()
         status("\nLogging Out ...", 1)
@@ -39,6 +39,7 @@ def dashboard(user):
 
 
 def show_profile(user):
+    clear_screen()
     rule("Profile")
     profile = Table(title= "")
 
@@ -50,15 +51,25 @@ def show_profile(user):
     profile.add_row("Username", user["Username"])
     console.print(profile)
 
+    panel("Enter 'q' to go back")
+    key = input(">>> ")
+    if key == "q":
+        status("Returning to dashboard", 0.6)
+        dashboard(user)
+    else:
+        error("Invalid choice")
+
 def update_profile(user):
+    clear_screen()
     panel("Update Profile Info")
     old_name = user["Name"]
-    console.print(f"Current Name: {old_name}\n")
-    console.print("Enter new name to update")
+    console.print(f"Current Name: {old_name}\n", style= PRIMARY)
+    console.print("Enter new name to update", style = "cyan")
     new_name = input(">>> ")
     if new_name:
         user['Name'] = new_name
-        console.print(f"Name updated from {old_name} to {new_name}")
+        panel(f"Name updated from {old_name} to {new_name}")
+        sleep(1)
 
 def delete_profile(user):
     console.print("Deleting Profile Feature comming soon!", style=SUCCESS)
