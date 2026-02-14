@@ -47,6 +47,18 @@ def panel(msg, title = "", style = PANEL):
 def rule(msg):
     console.rule(msg, style = RULE)
 
+# === FOR LAYOUTS (NEW FUNCTION) ===
+def create_panel(msg, title="", subtitle="", style=PANEL, border_style=None):
+    """Return a Panel object for use in layouts"""
+    return Panel(
+        msg, 
+        title=title,
+        subtitle=subtitle,
+        style=style, 
+        border_style=border_style or style,
+        expand=False
+    )
+
 
 #Table
 def display_user_table(users):
