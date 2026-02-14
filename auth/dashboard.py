@@ -1,66 +1,41 @@
 from .ui import *
 from .theme import *
 from .sessions import *
-from rich.layout import Layout
 
 def dashboard(user):
-    layout = Layout()
+    clear_screen()
+    rule("Dashboard")
 
-    layout.split_column(
-        Layout(name = "header", size = 3),
-        Layout(name = "actions", size= 8)
-    )
+    panel(f"Welcome back {user['Username']}")
 
+    menu = Table(title= "")
 
-    header_text = f"Welcome back, {user['Name']}!"
-    layout['header'].update(
-        create_panel(
-            header_text,
-            title= "Dashboard",
-            style = "bold bright_cyan",
-            border_style= "bright_cyan"
-        )
-    )
+    menu.add_column("Option", style=ACCENT, justify= "center")
+    menu.add_column("Action", style="magenta",)
 
-    actions = f"""
-    [1] View Profile
-    [2] Update Name
-    [3] Delete Account
-    [4] Logout
-    """
+    menu.add_row("1", "View Profile")
+    menu.add_row("2", "Update Profile")
+    menu.add_row("3", "Delete Profile")
+    menu.add_row("4", "Logout")
+    console.print(menu)
 
-    layout['actions'].update(
-        create_panel(
-            actions,
-            title="Choose action",
-            subtitle= "Press number",
-            border_style= "bright_green"
-        )
-    )
+    dash_choice = input(">>> ")
 
-
-
-    console.clear()
-    console.print(layout)
-
-    choice = input(">>> ")
-
-    if choice == "1":
+    if dash_choice == "1":
         status("\nGetting info ...", 0.5)
         show_profile(user)
-    elif choice == "2":
+    elif dash_choice == "2":
         update_profile(user)
         status("Returning to dashboard", 0.6)
-    elif choice == "3":
+    elif dash_choice == "3":
         delete_profile(user)
         status("Returning to dashboard", 0.6)
-    elif choice == "4":
+    elif dash_choice == "4":
         end_session()
         status("\nLogging Out ...", 1)
         status("\nReturning to Main Menu ...", 1)
     else:
         error("Invalid choice")
-
 
 
 def show_profile(user):
