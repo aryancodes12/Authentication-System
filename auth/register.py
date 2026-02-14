@@ -1,4 +1,4 @@
-from .validators import is_valid_email, is_unique_username
+from .validators import is_valid_email, is_unique_username, validate_password
 from .ui import *
 import time
 
@@ -34,18 +34,21 @@ def register_user(users, counter):
 
     #Password Creation
     while True:
-        console.print("\nCreate a password", style = "cyan")
+        console.print("\nCreate a password", style="cyan")
         password = input(">>> ")
-        if password == username:
-            warn("Password cannot match Username")
-        elif len(password) < 8:
-            warn("Password must be of 8 character or more")
-        elif "_" not in password:
-            warn("Password must include special character ('_')")
-        else:
-            console.print("\nConfirm the password" , style = "cyan")
+    
+        is_valid, message = validate_password(password, username)
+    
+        if is_valid:
+            console.print("\nConfirm the password", style="cyan")
             confirm = input(">>> ")
-            break
+        
+            if password == confirm:
+                break
+            else:
+                error("❌ Passwords don't match!")
+        else:
+            warn(message)
 
 #Storing in Dict
     user_id = f"u{counter:03d}"
