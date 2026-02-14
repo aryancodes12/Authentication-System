@@ -8,7 +8,7 @@ def login(users):
     #Username / Email input
     while True:
         console.print("\nEnter your username or email ('q' to quit)", style="cyan")
-        identifier = input(">>> ").lower()
+        identifier = input(">>> ").strip().lower()
 
         if identifier == "q":
             return None
@@ -23,14 +23,21 @@ def login(users):
             continue
 
         #Password input
-        for i in range(3, 0, -1):
-            console.print("\nEnter password", style="cyan")
+        attempts = 3
+        while attempts > 0:
+            console.print(f"\nEnter Password ([yellow]{attempts} attempts left[/yellow])", style="cyan")
             password = input(">>> ")
 
             if password == user["Password"]:
+                panel(f"Welcome back, {user['Name']}!")
+                status("Starting session...", 1)
                 return user
             else:
-                error("Incorrect Password")
-                i -= 1
-                if i == 0:
-                    break
+                attempts -= 1
+                if attempts > 0:
+                    error(f"Incorrect password! {attempts} attempts remaining")
+                else:
+                    error("Too many failed attempts")
+                    warn("Returning to main menu..")
+                    status("", 1)
+                    return None
