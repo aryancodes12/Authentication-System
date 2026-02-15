@@ -97,11 +97,11 @@ def warn_panel(msg, title= "WARNING"):
 
 #Loading 
 def status(msg, duration):
-    with console.status(f"[{PRIMARY}{msg}[/{PRIMARY}]", spinner = "dots", ):
+    with console.status(f"[{PRIMARY}]{msg}[/{PRIMARY}]", spinner = "dots", ):
         time.sleep(duration)
 
 def fake_loading(msg):
-    for _ in track(range(30), description=f"[{PRIMARY}{msg}[/{PRIMARY}]]"):
+    for _ in track(range(30), description=f"[{PRIMARY}]{msg}[/{PRIMARY}]]"):
         time.sleep(0.02)
 
 
@@ -117,7 +117,7 @@ def space(lines = 1):
 
 def get_input(prompt_text, password = False):
     if password:
-        return Prompt.ask(f"[{PRIMARY}{prompt_text}[/{PRIMARY}]", password=True)
+        return Prompt.ask(f"[{PRIMARY}]{prompt_text}[/{PRIMARY}]", password=True)
     else:
         console.print(f"[{PRIMARY}]{prompt_text}:[/{PRIMARY}]")
         return input(">>> ").strip()
