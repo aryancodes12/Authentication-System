@@ -36,7 +36,7 @@ def info_panel(content, title=""):
         )
     )
 
-def menu_panel(itmes, title="Menu"):
+def menu_panel(items, title="Menu"):
     formatted = "\n".join([f"[{PRIMARY}][{i+1}][/{PRIMARY}] {item}" for i, item in enumerate(items)])
     
     console.print(
@@ -87,7 +87,7 @@ def error_panel(msg, title="ERROR"):
 def warn_panel(msg, title= "WARNING"):
     console.print(
         Panel(
-            f"[{WARNING}]{message}[/{WARNING}]",
+            f"[{WARNING}]{msg}[/{WARNING}]",
             title=f"[{WARNING}]{title}[/{WARNING}]",
             border_style=BORDER_WARNING,
             expand=False
@@ -101,7 +101,7 @@ def status(msg, duration):
         time.sleep(duration)
 
 def fake_loading(msg):
-    for _ in track(range(30), description=f"[{PRIMARY}]{msg}[/{PRIMARY}]]"):
+    for _ in track(range(30), description=f"[{PRIMARY}]{msg}[/{PRIMARY}]"):
         time.sleep(0.02)
 
 
