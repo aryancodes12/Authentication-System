@@ -15,7 +15,7 @@ def dashboard(user):
 
     menu.add_row("1", "View Profile")
     menu.add_row("2", "Update Profile")
-    menu.add_row("3", "Delete Profile")
+    menu.add_row("3", "Update Password")
     menu.add_row("4", "Logout")
     console.print(menu)
 
@@ -70,9 +70,26 @@ def update_profile(user):
         sleep(1)
         status("Returning to dashboard", 0.6)
 
+
 def update_password(user):
     clear_screen()
-    panel("Update your current password", title = "Update Password")
+    msg = f"""
+    Update your current password
+    Enter current password to begin
+    """
+    panel(msg, title = "Update Password")
+    while True:
+        current = input(">>> ")
+
+        if current == user['Password']:
+            panel("Create new password")
+            new_pass = input(">>> ")
+
+            if new_pass != current:
+                panel("Confirm the password")
+                confirm = input(">>> ")
+        elif current != user['Password']:
+            error("Incorrect Password")
 
     
 
