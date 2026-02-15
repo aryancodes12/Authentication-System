@@ -150,6 +150,16 @@ def display_user_table(users):
 
 def profile_table(user):
     table = Table(show_header=False, box=None)
+    table.add_row(f"[{PRIMARY}]Name:[/{PRIMARY}]", f"[{ACCENT}]{user['Name']}[/{ACCENT}]")
+    table.add_row(f"[{PRIMARY}]Email:[/{PRIMARY}]", f"[{ACCENT}]{user['Email']}[/{ACCENT}]")
+    table.add_row(f"[{PRIMARY}]Username:[/{PRIMARY}]", f"[{ACCENT}]{user['Username']}[/{ACCENT}]")
+    table.add_row(f"[{PRIMARY}]Status:[/{PRIMARY}]", f"[{SUCCESS}]✓ Active[/{SUCCESS}]")
+
+    return table
+
+
+
+
 #LOGO
 
 def animated_logo():
