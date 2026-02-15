@@ -176,8 +176,7 @@ def animated_logo():
         console.print(line, style=PRIMARY)
         sleep(0.05)
 
-    console.print(f"\n[{GLOW}]    ▂▃▅▇█▓▒░ AUTHENTICATION SYSTEM ░▒▓█▇▅▃▂[/{GLOW}]")
-    console.print(f"[{SUBHEADER}]              by Aryan[/{SUBHEADER}]\n")
+    console.print(f"\n[{GLOW}]▂▃▅▇█▓▒░ AUTHENTICATION SYSTEM ░▒▓█▇▅▃▂[/{GLOW}]" + f"\n[{SUBHEADER}]              by Aryan[/{SUBHEADER}]")
     sleep(0.5)
 
 

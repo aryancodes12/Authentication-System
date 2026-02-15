@@ -2,12 +2,11 @@ from .ui import *
 
 def login(users):
     clear_screen()
-    header("LOGIN", "Welcome back!")
+    header("Welcome to LOGIN page")
     space()
 
     #Username / Email input
     while True:
-        # console.print("\nEnter your username or email ('q' to quit)", style="cyan")
         username = get_input("Enter Username or Email ('q' to quit)")
 
 
@@ -47,6 +46,5 @@ def login(users):
                 else:
                     space()
                     error_panel("Too many failed attempts")
-                    warn_panel("Returning to main menu..")
-                    status("", 1)
+                    status("Returning to main menu...", 1)
                     return None
