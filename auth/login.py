@@ -2,35 +2,36 @@ from .ui import *
 
 def login(users):
     clear_screen()
-    rule("")
-    panel("Welcome to Login Page")
+    header("LOGIN", "Welcome back!")
+    space()
 
     #Username / Email input
     while True:
-        console.print("\nEnter your username or email ('q' to quit)", style="cyan")
-        identifier = input(">>> ").strip().lower()
+        # console.print("\nEnter your username or email ('q' to quit)", style="cyan")
+        username = get_input("Username or Email")
 
 
-        if identifier == "q":
+        if username == "q":
             return None
 
         user = None
         for u in users.values():
-            if u["Username"].lower() == identifier or u["Email"] == identifier:
+            if u["Username"].lower() == username or u["Email"] == username:
                 user = u
                 break
         if not user:
             error("User not Found")
-            continue
+            wait_for_enter()
+            return None
 
         #Password input
         attempts = 3
         while attempts > 0:
-            console.print(f"\nEnter Password ([yellow]{attempts} attempts left[/yellow])", style="cyan")
-            password = input(">>> ")
+            console.print(f"\n([yellow]{attempts} attempts left[/yellow])", style="cyan")
+            password = get_input("Password", password=True)
 
             if password == user["Password"]:
-                panel(f"Welcome back, {user['Name']}!")
+                success_panel(f"Welcome back, {user['Name']}!")
                 status("Starting session...", 1)
                 return user
             else:
@@ -38,7 +39,7 @@ def login(users):
                 if attempts > 0:
                     error(f"Incorrect password! {attempts} attempts remaining")
                 else:
-                    error("Too many failed attempts")
-                    warn("Returning to main menu..")
+                    error_panel("Too many failed attempts")
+                    warn_panel("Returning to main menu..")
                     status("", 1)
                     return None
