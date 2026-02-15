@@ -42,53 +42,44 @@ def show_profile(user):
     clear_screen()
     status("Loading information...", 0.6)
     rule("Profile")
-    profile = Table(title= "")
-
-    profile.add_column("Field", style=PRIMARY)
-    profile.add_column("Value", style=ACCENT)
-
-    profile.add_row("Name", user["Name"])
-    profile.add_row("Email", user["Email"])
-    profile.add_row("Username", user["Username"])
+    profile = profile_table(user)
     console.print(profile)
-
-    panel("Press Enter to go back")
-    key = input("")
-    if not key:
-        return None
+    wait_for_enter("Press Enter to go back")
+    # panel("Press Enter to go back")
+    # key = input("")
+    # if not key:
+    #     return None
         
 
 def update_profile(user):
     clear_screen()
-    panel("Update Profile Info")
+    header("Update Name")
     old_name = user["Name"]
-    console.print(f"Current Name: {old_name}\n", style= PRIMARY)
-    console.print("Enter new name to update", style = "cyan")
-    new_name = input(">>> ")
+    space()
+    info(f"Current Name: {old_name}")
+
+    # console.print("Enter new name to update", style = "cyan")
+    new_name = get_input("Enter new name to update")
+    space()
     if new_name:
         user['Name'] = new_name
-        panel(f"Name updated from {old_name} to {new_name}")
+        success_panel(f"Name updated from {old_name} to {new_name}")
         sleep(1)
         status("Returning to dashboard", 0.6)
 
 
 def update_password(user):
     clear_screen()
-    msg = f"""
-    Update your current password
-    Enter current password to begin
-    """
-    panel(msg, title = "Update Password")
+    header("Update password",)
+    space()
     while True:
-        current = input(">>> ")
+        current = get_input("Enter current password")
 
         if current == user['Password']:
-            panel("Create new password")
-            new_pass = input(">>> ")
+            new_pass = get_input("Create new Password")
 
             if new_pass != current:
-                panel("Confirm the password")
-                confirm = input(">>> ")
+                confirm = get_input("Confirm the password")
         elif current != user['Password']:
             error("Incorrect Password")
 
