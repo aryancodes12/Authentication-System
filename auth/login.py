@@ -8,7 +8,7 @@ def login(users):
     #Username / Email input
     while True:
         # console.print("\nEnter your username or email ('q' to quit)", style="cyan")
-        username = get_input("Username or Email")
+        username = get_input("Enter Username or Email ('q' to quit)")
 
 
         if username == "q":
@@ -20,14 +20,14 @@ def login(users):
                 user = u
                 break
         if not user:
-            error("User not Found")
+            error_panel("User not Found")
             wait_for_enter()
             return None
 
         #Password input
         attempts = 3
         while attempts > 0:
-            console.print(f"\n([yellow]{attempts} attempts left[/yellow])", style="cyan")
+            warn_panel(f"{attempts} attempts left")
             password = get_input("Password", password=True)
 
             if password == user["Password"]:
@@ -37,7 +37,7 @@ def login(users):
             else:
                 attempts -= 1
                 if attempts > 0:
-                    error(f"Incorrect password! {attempts} attempts remaining")
+                    error_panel(f"Incorrect password! {attempts} attempts remaining")
                 else:
                     error_panel("Too many failed attempts")
                     warn_panel("Returning to main menu..")
