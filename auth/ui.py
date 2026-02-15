@@ -1,9 +1,9 @@
-import time
-import os
+import time, os
 from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
 from rich.progress import track
+from rich.prompt import Prompt
 from .theme import *
 
 console = Console()
@@ -13,9 +13,40 @@ def clear_screen():
     time.sleep(0.2)
     os.system("cls" if os.name == "nt" else "clear")
 
-def sleep(t = 1):
-    time.sleep(t)
+def sleep(seconds = 1):
+    time.sleep(seconds)
 
+def header(title, subtitle = ""):
+    console.print(
+        Panel(
+            f"[{GLOW}]▂▃▅▇█▓▒░[/{GLOW}] [{HEADER}]{title}[/{HEADER}] [{GLOW}]░▒▓█▇▅▃▂[/{GLOW}]"
+            + (f"\n[{SUBHEADER}]{subtitle}[/{SUBHEADER}]" if subtitle else ""),
+            border_style=BORDER_PRIMARY,
+            expand=False
+        )
+    )
+
+def info_panel(content, title=""):
+    console.print(
+        Panel(
+            content,
+            title=title if title else None,
+            border_style=BORDER_ACCENT,
+            expand=False
+        )
+    )
+
+def menu_panel(itmes, title="Menu"):
+    formatted = "\n".join([f"[{PRIMARY}][{i+1}][/{PRIMARY}] {item}" for i, item in enumerate(items)])
+    
+    console.print(
+        Panel(
+            formatted,
+            title=f"[{HEADER}]{title}[/{HEADER}]",
+            border_style=BORDER_PRIMARY,
+            expand=False
+        )
+    )
 
 #success, warn, error
 def success(msg):
@@ -28,25 +59,68 @@ def error(msg):
     console.print(msg, style = ERROR)
 
 
+
+def info(msg):
+    console.print(msg, style=INFO)
+
+def success_panel(msg, title="SUCCESS"):
+    console.print(
+        Panel(
+            msg,
+            title=title,
+            style=SUCCESS,
+            border_style=BORDER_SUCCESS,
+            expand=False
+        )
+    )
+
+def error_panel(msg, title="ERROR"):
+    console.print(
+        Panel(
+            msg,
+            style=ERROR,
+            border_style=BORDER_ERROR,
+            expand=False
+        )
+    )
+
+def warn_panel(msg, title= "WARNING"):
+    console.print(
+        Panel(
+            f"[{WARNING}]{message}[/{WARNING}]",
+            title=f"[{WARNING}]{title}[/{WARNING}]",
+            border_style=BORDER_WARNING,
+            expand=False
+        )
+    )
+
+
 #Loading 
-def status(msg, t):
-    with console.status(msg, spinner = "dots"):
-        time.sleep(t)
+def status(msg, duration):
+    with console.status(f"[{PRIMARY}{msg}[/{PRIMARY}]", spinner = "dots", ):
+        time.sleep(duration)
 
 def fake_loading(msg):
-    for _ in track(range(30), description=msg):
+    for _ in track(range(30), description=f"[{PRIMARY}{msg}[/{PRIMARY}]]"):
         time.sleep(0.02)
 
 
 #Panel and Rule
-def panel(msg, title = "", style = PANEL):
-    console.print(
-        Panel(msg, title = title, style = style, expand= False)
-    )
 
-def rule(msg):
-    console.rule(msg, style = RULE)
 
+def rule(text = ""):
+    console.rule(f"[{RULE}]{text}[/{RULE}]" if text else "", style = RULE)
+
+def space(lines = 1):
+    for _ in range(lines):
+        console.print()
+
+def get_input(prompt_text, password = False):
+    if password:
+        return Prompt.ask(f"[{PRIMARY}{prompt_text}[/{PRIMARY}]", password=True)
+    else:
+        console.print(f"[{PRIMARY}]{prompt_text}:[/{PRIMARY}]")
+        return input(">>> ").strip()
 #Table
 def display_user_table(users):
     table = Table(title = "\nRegistered Users")
