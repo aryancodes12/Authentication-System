@@ -121,9 +121,16 @@ def get_input(prompt_text, password = False):
     else:
         console.print(f"[{PRIMARY}]{prompt_text}:[/{PRIMARY}]")
         return input(">>> ").strip()
+
+def get_choice(prompt_text = "Select option"):
+    console.print(f"\n{prompt_text}:", style=ACCENT)
+    return input(">>> ").strip()
+
+
+
 #Table
 def display_user_table(users):
-    table = Table(title = "\nRegistered Users")
+    table = Table(title = "Registered Users", style=HEADER)
 
     table.add_column("User Id", style = SUCCESS)
     table.add_column("Name", style = ACCENT)
@@ -141,6 +148,8 @@ def display_user_table(users):
     return table
 
 
+def profile_table(user):
+    table = Table(show_header=False, box=None)
 #LOGO
 
 def animated_logo():
