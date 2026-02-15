@@ -4,51 +4,47 @@ import time
 
 def register_user(users, counter):
     clear_screen()
-    rule("")
-    panel("Welcome to the Registration Page")
+    header("Welcome to the Registration Page")
 
     #Name input
-    console.print("Enter your First Name", style = "cyan")
-    first_name = input(">>> ").title()
-    console.print("\nEnter your Last Name", style = "cyan")
-    last_name = input(">>> ").title()
+    first_name = get_input("Enter your First Name").title()
+    last_name = get_input("Enter your Last Name").title()
 
     full_name = f"{first_name} {last_name}"
 
     #Email input
     while True:
-        console.print("\nEnter Email Id", style = "cyan")
-        email = input(">>> ")
+        email = get_input("Enter Email id")
         if is_valid_email(email):
             break
         error("Invalid Email")
 
     #Username Creation
     while True:
-        console.print("\nCreate Username", style = "cyan")
-        username = input(">>> ").lower()
+        space()
+        username = get_input("create Username").lower()
         if is_unique_username(username, users):
             break
         else:
-            warn("Username already taken")
+            warn_panel("Username already taken")
 
     #Password Creation
     while True:
-        console.print("\nCreate a password", style="cyan")
-        password = input(">>> ")
+        space()
+        password = get_input("Create a password")
     
         is_valid, message = validate_password(password, username)
     
         if is_valid:
-            console.print("\nConfirm the password", style="cyan")
-            confirm = input(">>> ")
+            space()
+            confirm = get_input("Confirm password")
         
             if password == confirm:
                 break
             else:
                 error("❌ Passwords don't match!")
-        else:
-            warn(message)
+        # else:
+        #     warn()
 
 #Storing in Dict
     user_id = f"u{counter:03d}"
@@ -60,7 +56,7 @@ def register_user(users, counter):
     }
 
     #Success message
-    success("Registration Successful!")
-    time.sleep(0.8)
+    success_panel("Registration Successful!")
+    sleep(0.8)
 
     return users, counter + 1
