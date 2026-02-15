@@ -9,6 +9,7 @@ from auth.sessions import *
 #startup
 clear_screen()
 animated_logo()
+space()
 status("Initializing Authentication System ...", 1.5)
 users = load_users()
 
@@ -33,7 +34,7 @@ while True:
         user = login(users)
         clear_screen()
         if user:
-            status("Starting session...", 1)
+            # status("Starting session...", 1)
             start_session(user)
 
             while is_logged_in():
@@ -43,6 +44,16 @@ while True:
     elif choice == "2":
         register_user(users, counter)
     elif choice == "3":
+        space(2)
+        fake_loading("Saving data ")
+        save_users(users)
+
+        space()
+
+    #Displaying the present data from JSON
+        status("Displaying Data ....", 1)
+        space()
+        # console.print(display_user_table(users))
         space()
         success_panel("👋 Thanks for using the System!")
         break
@@ -50,14 +61,4 @@ while True:
         space()
         warn("❌ Invalid Choice")
 
-#Saving data in JSON
-space(2)
-fake_loading("Saving data ")
-save_users(users)
 
-space()
-
-#Displaying the present data from JSON
-status("Displaying Data ....", 1)
-space()
-console.print(display_user_table(users))
