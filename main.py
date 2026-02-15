@@ -22,7 +22,7 @@ else:
 while True:
     clear_screen()
     header("Authentication System")
-    rule("")
+    space()
     menu_items = ["Login", "Register new User", "Exit"]
     
     #Menu
@@ -43,17 +43,21 @@ while True:
     elif choice == "2":
         register_user(users, counter)
     elif choice == "3":
+        space()
         success_panel("👋 Thanks for using the System!")
         break
     else:
+        space()
         warn("❌ Invalid Choice")
 
 #Saving data in JSON
+space(2)
 fake_loading("Saving data ")
 save_users(users)
 
-success_panel("Data Saved")
+space()
 
 #Displaying the present data from JSON
 status("Displaying Data ....", 1)
+space()
 console.print(display_user_table(users))
