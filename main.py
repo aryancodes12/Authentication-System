@@ -54,7 +54,6 @@ while True:
         status("Displaying Data ....", 1)
         space()
         # console.print(display_user_table(users))
-        space()
         success_panel("👋 Thanks for using the System!")
         break
     else:

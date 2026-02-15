@@ -1,11 +1,15 @@
 from .ui import *
 from .theme import *
 from .sessions import *
+from .validators import validate_password
 
 def dashboard(user):
+    global username
     clear_screen()
+    username = user['Username']
+    header("DASHBOARD")
+    space()
 
-    header("DASHBOARD", f"Welcome back {user['Username']}")
 
     menu_items = [
         "View Profile",
@@ -41,14 +45,12 @@ def dashboard(user):
 def show_profile(user):
     clear_screen()
     status("Loading information...", 0.6)
-    rule("Profile")
+    header("Account Information")
     profile = profile_table(user)
     console.print(profile)
+    space()
     wait_for_enter("Press Enter to go back")
-    # panel("Press Enter to go back")
-    # key = input("")
-    # if not key:
-    #     return None
+
         
 
 def update_profile(user):
@@ -63,9 +65,11 @@ def update_profile(user):
     space()
     if new_name:
         user['Name'] = new_name
+        space()
         success_panel(f"Name updated from {old_name} to {new_name}")
-        sleep(1)
-        status("Returning to dashboard", 0.6)
+        space()
+        wait_for_enter()
+        status("Returning to dashboard", 0.5)
 
 
 def update_password(user):
@@ -74,17 +78,32 @@ def update_password(user):
     space()
     while True:
         current = get_input("Enter current password")
+        space()
 
-        if current == user['Password']:
-            new_pass = get_input("Create new Password")
+        if current == user['Password']:  
+            password = get_input("Create a password")
+            space()
+            is_valid, message = validate_password(password, current)
+            console.print(message)
 
-            if new_pass != current:
-                confirm = get_input("Confirm the password")
-        elif current != user['Password']:
-            error("Incorrect Password")
+            if is_valid:
+                space()
+                confirm = get_input("Confirm password")
+            
+                if password == confirm:
+                    user['Password'] = password
+                    space()
+                    success_panel("Password is Updated")
+                    break
+                else:
+                    error("❌ Passwords don't match!")
+            
 
     
 
 
 def delete_profile(user):
+    clear_screen()
     console.print("Deleting Profile Feature comming soon!", style=SUCCESS)
+    space()
+    wait_for_enter()
