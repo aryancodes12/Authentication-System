@@ -4,32 +4,33 @@ from .sessions import *
 
 def dashboard(user):
     clear_screen()
-    rule("Dashboard")
 
-    panel(f"Welcome back {user['Username']}")
+    header("DASHBOARD", f"Welcome back {user['Username']}")
 
-    menu = Table(title= "")
+    menu_items = [
+        "View Profile",
+        "Update Name",
+        "Change Password",
+        "Delete Account",
+        "Logout"
+    ] 
 
-    menu.add_column("Option", style=ACCENT, justify= "center")
-    menu.add_column("Action", style="magenta",)
+    menu_panel(menu_items, title="Quick Actions")
+    
 
-    menu.add_row("1", "View Profile")
-    menu.add_row("2", "Update Profile")
-    menu.add_row("3", "Update Password")
-    menu.add_row("4", "Logout")
-    console.print(menu)
-
-    dash_choice = input(">>> ")
+    dash_choice = get_choice("Select option (1-5)")
 
     if dash_choice == "1":
         show_profile(user)
     elif dash_choice == "2":
         update_profile(user)
-        # status("Returning to dashboard", 0.6)
+        
     elif dash_choice == "3":
         update_password(user)
         status("Returning to dashboard", 5)
     elif dash_choice == "4":
+        delete_profile(user)
+    elif dash_choice == "5":
         end_session()
         status("\nLogging Out ...", 1)
         status("\nReturning to Main Menu ...", 1)
