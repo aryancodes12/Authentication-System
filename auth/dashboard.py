@@ -22,14 +22,13 @@ def dashboard(user):
     dash_choice = input(">>> ")
 
     if dash_choice == "1":
-        status("\nGetting info ...", 0.5)
         show_profile(user)
     elif dash_choice == "2":
         update_profile(user)
-        status("Returning to dashboard", 0.6)
+        # status("Returning to dashboard", 0.6)
     elif dash_choice == "3":
-        delete_profile(user)
-        status("Returning to dashboard", 0.6)
+        update_password(user)
+        status("Returning to dashboard", 5)
     elif dash_choice == "4":
         end_session()
         status("\nLogging Out ...", 1)
@@ -40,6 +39,7 @@ def dashboard(user):
 
 def show_profile(user):
     clear_screen()
+    status("Loading information...", 0.6)
     rule("Profile")
     profile = Table(title= "")
 
@@ -51,15 +51,11 @@ def show_profile(user):
     profile.add_row("Username", user["Username"])
     console.print(profile)
 
-    panel("Enter 'q' to go back")
-    while True:
-        key = input(">>> ")
-        if key == "q":
-            status("Returning to dashboard", 0.6)
-            dashboard(user)
-            break
-        else:
-            error("Invalid choice")
+    panel("Press Enter to go back")
+    key = input("")
+    if not key:
+        return None
+        
 
 def update_profile(user):
     clear_screen()
@@ -72,6 +68,14 @@ def update_profile(user):
         user['Name'] = new_name
         panel(f"Name updated from {old_name} to {new_name}")
         sleep(1)
+        status("Returning to dashboard", 0.6)
+
+def update_password(user):
+    clear_screen()
+    panel("Update your current password", title = "Update Password")
+
+    
+
 
 def delete_profile(user):
     console.print("Deleting Profile Feature comming soon!", style=SUCCESS)
