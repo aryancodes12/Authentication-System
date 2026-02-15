@@ -21,21 +21,15 @@ else:
 #main loop
 while True:
     clear_screen()
-    panel("Authentication System")
+    header("Authentication System")
     rule("")
-    menu = """
-    1. Register New User
-    2. Login
-    3. Exit
-        """
+    menu_items = ["Login", "Register new User", "Exit"]
     
     #Menu
-    panel(menu, title = "Menu")
-    choice = input(">>> ")
+    menu_panel(menu_items)
+    choice = get_choice("Select option (1-3)")
 
     if choice == "1":
-        register_user(users, counter)
-    elif choice == "2":
         user = login(users)
         clear_screen()
         if user:
@@ -45,9 +39,11 @@ while True:
             while is_logged_in():
                 current = get_current_user()
                 dashboard(current)
-
+        
+    elif choice == "2":
+        register_user(users, counter)
     elif choice == "3":
-        panel("👋 Thanks for using the System!")
+        success_panel("👋 Thanks for using the System!")
         break
     else:
         warn("❌ Invalid Choice")
@@ -56,7 +52,7 @@ while True:
 fake_loading("Saving data ")
 save_users(users)
 
-panel("Data Saved", style = "green")
+success_panel("Data Saved")
 
 #Displaying the present data from JSON
 status("Displaying Data ....", 1)
