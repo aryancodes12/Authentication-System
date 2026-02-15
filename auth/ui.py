@@ -173,9 +173,14 @@ def animated_logo():
     ]
 
     for line in logo:
-        console.print(line, style="dark_orange")
+        console.print(line, style=PRIMARY)
         sleep(0.05)
 
-    console.print("\n        🔐 AUTHENTICATION SYSTEM", style="bold purple")
-    console.print("              by Aryan\n", style="purple")
+    console.print(f"\n[{GLOW}]    ▂▃▅▇█▓▒░ AUTHENTICATION SYSTEM ░▒▓█▇▅▃▂[/{GLOW}]")
+    console.print(f"[{SUBHEADER}]              by Aryan[/{SUBHEADER}]\n")
     sleep(0.5)
+
+
+def wait_for_enter(msg = "Press Enter to Return"):
+    console.print(msg, style=MUTED)
+    input()
