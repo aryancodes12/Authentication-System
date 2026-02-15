@@ -10,6 +10,7 @@ def login(users):
         console.print("\nEnter your username or email ('q' to quit)", style="cyan")
         identifier = input(">>> ").strip().lower()
 
+
         if identifier == "q":
             return None
 
