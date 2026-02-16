@@ -120,11 +120,11 @@ def get_input(prompt_text, password = False):
         return Prompt.ask(f"[{PRIMARY}]{prompt_text}[/{PRIMARY}]", password=True)
     else:
         console.print(f"[{PRIMARY}]{prompt_text}:[/{PRIMARY}]")
-        return input(">>> ").strip()
+        return input("❯❯ ").strip()
 
 def get_choice(prompt_text = "Select option"):
     console.print(f"\n{prompt_text}:", style=ACCENT)
-    return input(">>> ").strip()
+    return input("❯❯ ").strip()
 
 
 

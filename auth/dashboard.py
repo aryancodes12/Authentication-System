@@ -31,7 +31,7 @@ def dashboard(user):
         
     elif dash_choice == "3":
         update_password(user)
-        status("Returning to dashboard", 5)
+        status("Returning to dashboard", 1)
     elif dash_choice == "4":
         delete_profile(user)
     elif dash_choice == "5":
