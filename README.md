@@ -1,238 +1,337 @@
-# 🔐 User Authentication System
+# 🔐 Authentication System
 
-<div align="center">
+A terminal-based authentication system built from scratch in Python with a cyberpunk-themed UI. This project demonstrates core authentication concepts, clean code architecture, and modern terminal interface design.
 
-![Python Version](https://img.shields.io/badge/python-3.6%2B-blue.svg)
-![License](https://img.shields.io/badge/license-MIT-green.svg)
-![Status](https://img.shields.io/badge/status-active-success.svg)
-![Maintenance](https://img.shields.io/badge/maintained-yes-brightgreen.svg)
-![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
-
-A robust Python-based command-line authentication system with JSON persistence, built as a learning project to master software development fundamentals.
-
-[Features](#-features) • [Installation](#-installation) • [Usage](#-usage) • [Roadmap](#️-development-roadmap) • [Contributing](#-contributing)
-
-</div>
-
----
-
-## 📋 Overview
-
-A comprehensive learning project building towards a complete authentication system with user management and admin capabilities. Currently features a fully functional registration module with modular architecture, input validation, and an elegant CLI interface.
-
-**Project Goal**: Transform fundamental Python concepts into a production-ready authentication system through iterative development and best practices.
+![Python Version](https://img.shields.io/badge/python-3.6%2B-blue)
+![Status](https://img.shields.io/badge/status-active-success)
+![Phase](https://img.shields.io/badge/phase-3%20complete-orange)
 
 ## ✨ Features
 
-### Current Features ✅
-- ✔️ **User Registration** - Complete registration workflow with validation
-- ✔️ **Email Validation** - RFC-compliant email format checking
-- ✔️ **Username Uniqueness** - Prevents duplicate usernames
-- ✔️ **Password Strength** - Enforces secure password requirements
-- ✔️ **Password Confirmation** - Double-entry verification
-- ✔️ **JSON Persistence** - Automatic data storage and retrieval
-- ✔️ **Auto-incrementing IDs** - Sequential user ID generation (u001, u002, ...)
-- ✔️ **Rich Console UI** - Color-coded, user-friendly terminal interface
-- ✔️ **Modular Architecture** - Clean separation of concerns
+### 🔐 **Core Authentication**
+- ✅ User registration with comprehensive validation
+- ✅ Secure login with username OR email
+- ✅ Session management (login/logout)
+- ✅ Password strength requirements (8+ chars, numbers, special characters)
+- ✅ Login attempt limiting (3 attempts maximum)
+- ✅ Input sanitization and validation
 
-### Coming Soon 🚀
-- 🔜 User login and authentication
-- 🔜 Session management
-- 🔜 Admin dashboard
-- 🔜 Password hashing (bcrypt)
-- 🔜 MySQL database integration
+### 👤 **User Management**
+- ✅ View profile information
+- ✅ Update display name
+- ✅ Change password with validation
+- ✅ Secure logout with session cleanup
 
-## 📁 Project Structure
+### 🎨 **Terminal UI**
+- ✅ Cyberpunk-themed interface with neon colors
+- ✅ 25+ reusable UI components
+- ✅ Color-coded feedback (success/error/warning)
+- ✅ Smooth transitions and loading animations
+- ✅ Professional panel layouts
+- ✅ 15 customizable themes (Cyberpunk default)
+
+## 🏗️ Project Structure
 ```
 Authentication-System/
 │
-├── auth/                    # All authentication code
-│   ├── dashboard.py        # User dashboard
-│   ├── login.py            # Login system
-│   ├── register.py         # Registration
-│   ├── sessions.py         # Keep users logged in
-│   ├── storage.py          # Save/load data
-│   ├── theme.py            # Colors and styles
-│   ├── ui.py               # Display components
-│   └── validators.py       # Check inputs
+├── auth/                      # Core authentication module
+│   ├── __init__.py           # Package initialization
+│   ├── dashboard.py          # User dashboard & profile management
+│   ├── login.py              # Login logic & authentication
+│   ├── register.py           # User registration flow
+│   ├── sessions.py           # Session state management
+│   ├── storage.py            # JSON data persistence
+│   ├── theme.py              # Color themes (15 options)
+│   ├── ui.py                 # 25+ reusable UI components
+│   └── validators.py         # Input validation functions
 │
-├── main.py                 # Start here!
-├── requirements.txt        # Libraries needed
-└── user_data.json          # User data storage
+├── user_data.json            # User database (auto-generated)
+├── main.py                   # Application entry point
+├── requirements.txt          # Python dependencies
+└── README.md                 # This file
 ```
 
-## 🛠️ Tech Stack
+### 🎯 **Architecture Principles**
+- **Modular Design:** Each file has a single, clear responsibility
+- **Separation of Concerns:** UI, logic, validation, and storage layers are separated
+- **Reusability:** 25+ UI components used throughout the application
+- **Clean Code:** Readable, maintainable, and well-documented code
 
-- **Language**: Python 3.6+
-- **UI Library**: Rich (terminal formatting)
-- **Data Storage**: JSON (migrating to MySQL in Phase 6)
-- **Security**: bcrypt (planned for Phase 5)
-
-## 📦 Installation
+## 🚀 Installation & Usage
 
 ### Prerequisites
 - Python 3.6 or higher
 - pip (Python package manager)
 
-### Setup Steps
+### Setup
 
 1. **Clone the repository**
 ```bash
-   git clone https://github.com/aryancodes12/Authentication-System.git
-   cd Authentication-System
+git clone https://github.com/aryancodes12/Authentication-System.git
+cd Authentication-System
 ```
 
-2. **Create virtual environment** (recommended)
+2. **Install dependencies**
 ```bash
-   python -m venv venv
-   
-   # On Windows
-   venv\Scripts\activate
-   
-   # On macOS/Linux
-   source venv/bin/activate
+pip install -r requirements.txt
 ```
 
-3. **Install dependencies**
-```bash
-   pip install -r requirements.txt
-```
-
-## 🚀 Usage
-
-### Starting the Application
+3. **Run the application**
 ```bash
 python main.py
 ```
 
-### Registration Flow
+## 📖 User Guide
 
-1. Launch the application
-2. Select "Register" from the main menu
-3. Enter your details:
-   - First Name
-   - Last Name
-   - Email Address
-   - Username (must be unique)
-   - Password (with strength requirements)
-   - Confirm Password
-4. Registration confirmation displayed
-5. Data automatically saved to `data/user_data.json`
+### Main Menu
+On launch, you'll see three options:
+```
+[1] Login
+[2] Register new User
+[3] Exit
+```
 
-## ⚠️ Important Security Notes
+### Registration Process
+1. Select option `2` from the main menu
+2. Enter your details:
+   - **First Name** and **Last Name**
+   - **Email Address** (must contain @gmail.com)
+   - **Username** (must be unique, lowercase)
+   - **Password** (requirements below)
+   - **Confirm Password**
 
-> **⚠️ WARNING**: This is an educational project currently in development.
+**Password Requirements:**
+- Minimum 8 characters
+- At least one number
+- At least one special character (@_!#$%^&*)
+- Cannot match username
 
-- 🔓 **Passwords are stored in plain text** - FOR LEARNING PURPOSES ONLY
-- 🚫 **DO NOT use in production** without implementing proper security
-- ✅ **Phase 5** will implement bcrypt password hashing
-- 🔐 **Phase 6** will migrate to MySQL with proper security practices
+### Login
+1. Select option `1` from the main menu
+2. Enter your **username** or **email**
+3. Enter your **password**
+   - You have 3 attempts before being locked out
+   - Failed attempts show remaining tries
+
+### Dashboard Features
+After successful login:
+
+**[1] View Profile** - Display your account information
+- Name, email, username
+- Account status
+
+**[2] Update Name** - Change your display name
+- Enter new name
+- Instant update
+
+**[3] Change Password** - Update your password
+- Verify current password
+- Enter new password (must meet requirements)
+- Confirm new password
+
+**[4] Delete Account** - Coming in Phase 4
+
+**[5] Logout** - End your session safely
+
+## 🎨 UI Components
+
+The system includes 25+ professionally designed components:
+
+### Display Components
+- `header()` - Cyberpunk ASCII art header with neon effects
+- `info_panel()` - Information display panels
+- `menu_panel()` - Numbered menu options
+- `profile_table()` - User profile data table
+- `space()` - Spacing between elements
+- `rule()` - Horizontal divider lines
+
+### Feedback Components
+- `success()` / `success_panel()` - Green success messages
+- `error()` / `error_panel()` - Red error messages
+- `warn()` / `warn_panel()` - Yellow warnings
+- `info()` - Cyan information messages
+
+### Interactive Components
+- `get_input()` - Text input with colored prompts
+- `get_choice()` - Menu selection
+- `wait_for_enter()` - Pause for user acknowledgment
+
+### Animation Components
+- `status()` - Animated spinner with message
+- `fake_loading()` - Progress bar animation
+- `animated_logo()` - Startup ASCII art animation
+
+## 🎨 Themes
+
+**Active Theme:** Cyberpunk (Neon colors on dark background)
+
+| Element | Color | Usage |
+|---------|-------|-------|
+| **Primary** | Bright Cyan | Headers, prompts, borders |
+| **Secondary** | Bright Magenta | Accents, dividers |
+| **Accent** | Bright Yellow | Highlights, menu choices |
+| **Success** | Bright Green | Success messages, checkmarks |
+| **Error** | Bright Red | Error messages, failures |
+| **Warning** | Yellow | Warnings, validation errors |
+| **Info** | Cyan | Information, hints |
+| **Muted** | Dim Cyan | Less important text |
+
+**Additional Themes Available:**
+Sunset, Ocean, Forest, Hacker Terminal, Dark Purple, Fire, Rainbow, Electric, Monochrome, Dracula, Nord, Solarized, Gruvbox, Monokai
+
+> To switch themes: Open `auth/theme.py` and uncomment your preferred theme
+
+## 🔐 Security Implementation
+
+### Current Security Features
+✅ Password validation (length, complexity)  
+✅ Login attempt limiting (3 tries)  
+✅ Session state management  
+✅ Input sanitization  
+✅ Username uniqueness checks  
+
+### ⚠️ Security Limitations (Educational Project)
+
+**DO NOT use in production without implementing:**
+- ❌ Password hashing (currently plain text)
+- ❌ Database encryption
+- ❌ HTTPS/SSL
+- ❌ Rate limiting
+- ❌ Email verification
+- ❌ Two-factor authentication
+- ❌ Password reset mechanism
+
+These features are planned for future phases (see Roadmap).
+
+## 🛠️ Tech Stack
+
+| Component | Technology | Purpose |
+|-----------|-----------|---------|
+| **Language** | Python 3.6+ | Core application logic |
+| **Terminal UI** | [Rich](https://github.com/Textualize/rich) | Beautiful terminal formatting |
+| **Data Storage** | JSON | User data persistence |
+| **Architecture** | Modular | Clean separation of concerns |
+
+**Dependencies:**
+```
+rich==13.7.0
+```
+
+## 📊 Project Statistics
+
+- **Total Lines of Code:** 600+
+- **Python Files:** 8 modular files
+- **UI Components:** 25+
+- **Themes Available:** 15
+- **Commits:** 25+
+- **Development Time:** 3 weeks
+- **Current Phase:** 3 (Complete)
 
 ## 🗺️ Development Roadmap
 
-### ✅ Phase 1: Registration Logic
-**Status**: Complete ✓
-- [x] User registration functionality
-- [x] Input validation (email, username, password)
-- [x] JSON data persistence
-- [x] Auto-incrementing user IDs
+### ✅ Phase 1: Registration (Complete)
+- User registration system
+- Input validation
+- JSON-based storage
 
-### ✅ Phase 1.5: UI Polishing
-**Status**: Complete ✓
-- [x] Rich library integration
-- [x] Color-coded console output
-- [x] Enhanced user experience
-- [x] Professional formatting
+### ✅ Phase 2: Refactoring (Complete)
+- Modular architecture
+- Separated UI components
+- Theme system implementation
+- Code cleanup and documentation
 
-### ✅ Phase 2: Refactoring
-**Status**: Complete ✓
-- [x] Modular architecture implementation
-- [x] Separation of concerns (UI, logic, storage, validation)
-- [x] Code organization and cleanup
-- [x] Documentation improvements
+### ✅ Phase 3: Authentication & Dashboard (Complete)
+- Login system with retry logic
+- Session management
+- User dashboard
+- Profile viewing
+- Name updates
+- Password changes
+- Secure logout
 
-### 🔄 Phase 3: User Login & Authentication
-**Status**: In Progress 🚧
-- [x] User login system
-- [x] Session management
-- [x] User dashboard with profile view
-- [x] Update Name
-- [x] Logout functionality
-- [ ] Delete account functionality
-
-### 📋 Phase 4: Admin Dashboard
-**Status**: Planned 📅
-- [ ] Admin authentication and authorization
+### 🚧 Phase 4: Admin Features (Next)
+- [ ] Admin login credentials
+- [ ] User management dashboard
 - [ ] View all registered users
-- [ ] User management (edit/delete users)
-- [ ] System statistics and analytics
-- [ ] Role-based access control
+- [ ] Delete user accounts
+- [ ] User search and filtering
+- [ ] Account status management
 
-### 🔐 Phase 5: Password Security
-**Status**: Planned 📅
-- [ ] Implement bcrypt password hashing
-- [ ] Secure password storage
+### 📋 Phase 5: Enhanced Security (Planned)
+- [ ] Password hashing with bcrypt
 - [ ] Password strength meter
-- [ ] Password reset functionality
-- [ ] Security best practices
+- [ ] Security questions for recovery
+- [ ] Account lockout after failed attempts
+- [ ] Password history (prevent reuse)
 
-### 🗄️ Phase 6: Database Migration
-**Status**: Planned 📅
-- [ ] Design MySQL database schema
-- [ ] Implement MySQL connection
-- [ ] CRUD operations with MySQL
-- [ ] Data migration script from JSON
-- [ ] Database optimization
+### 📋 Phase 6: Database Integration (Planned)
+- [ ] MySQL database setup
+- [ ] Database schema design
+- [ ] Migration from JSON to MySQL
+- [ ] Connection pooling
+- [ ] Prepared statements
+
+### 📋 Phase 7: Advanced Features (Future)
+- [ ] Two-factor authentication (2FA)
+- [ ] Email verification system
+- [ ] Activity logging and audit trail
+- [ ] Session timeout
+- [ ] "Remember Me" functionality
+- [ ] Password reset via email
+- [ ] Web interface (Flask/Django)
+
+## 🐛 Known Issues
+
+- Email validation currently only accepts @gmail.com addresses *(will be fixed to accept all valid email formats)*
+- Passwords stored in plain text *(will be fixed with bcrypt hashing in Phase 5)*
+- Session doesn't persist after application restart
+- No password recovery mechanism yet
+
+## 💡 What I Learned
+
+Building this project taught me:
+- ✅ Authentication flow patterns
+- ✅ Input validation strategies
+- ✅ Session state management
+- ✅ Modular code architecture
+- ✅ Terminal UI/UX design principles
+- ✅ Security considerations in auth systems
+- ✅ Error handling and user feedback
+- ✅ Code reusability through components
 
 ## 🤝 Contributing
 
-Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/aryancodes12/Authentication-System/issues).
+This is a personal learning project, but feedback and suggestions are welcome!
 
-### How to Contribute
-
-1. Fork the project
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
 3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
 
-## 🎓 Learning Outcomes
-
-Through this project, I've gained hands-on experience with:
-
-- ✅ Modular code architecture and design patterns
-- ✅ Input validation and data sanitization
-- ✅ File I/O and JSON data handling
-- ✅ Terminal UI/UX design with Rich library
-- ✅ Git version control and project management
-- 🔜 Authentication and authorization systems
-- 🔜 Password hashing and security best practices
-- 🔜 Database design and SQL operations
-
-## 👤 Author
+## 👨‍💻 Author
 
 **Aryan Gupta**
-
 - 🎓 B.Sc. Data Science & AI Student
 - 📧 Email: [aryansynthh@gmail.com](mailto:aryansynthh@gmail.com)
 - 💼 LinkedIn: [Aryan Rajesh Gupta](https://www.linkedin.com/in/aryan-rajesh-gupta-386449360)
-- 🐙 GitHub: [@aryancodes12](https://github.com/aryancodes12)
+- GitHub: [@aryancodes12](https://github.com/aryancodes12)
+- Project: [Authentication-System](https://github.com/aryancodes12/Authentication-System)
 
-## 💖 Acknowledgments
+*First-year B.Sc. Data Science & AI Student*
 
-- Thanks to the [Rich library](https://github.com/Textualize/rich) for beautiful terminal formatting
-- Inspired by real-world authentication systems
-- Built as part of my journey to master Python and software development
+## 🙏 Acknowledgments
+
+- [Rich](https://github.com/Textualize/rich) library by Will McGugan for beautiful terminal formatting
+- Python community for excellent documentation and learning resources
+- Inspiration from real-world authentication systems
+
 
 ---
 
-<div align="center">
+⭐ **If you found this project helpful, please consider giving it a star!**
 
-**⭐ Star this repo if you find it helpful!**
+Built with 💙 by [Aryan Gupta](https://github.com/aryancodes12) | Learning by Building 🚀
 
-*Learning by building. One project at a time.* 🚀
-
-Made with ❤️ by [Aryan Gupta](https://github.com/aryancodes12)
-
-</div>
+*Last Updated: February 2026 | Phase 3 Complete*
