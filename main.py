@@ -2,6 +2,7 @@ import os
 from auth.storage import load_users, save_users
 from auth.register import register_user
 from auth.login import login
+from auth.admin_dash import admin_dash
 
 from auth.ui import (clear_screen, sleep, header, info_panel, menu_panel, 
 success, success_panel, warn, warn_panel, error, error_panel, status, 
@@ -17,6 +18,18 @@ space()
 status("Initializing Authentication System ...", 1.5)
 users = load_users()
 
+#Checking if JSON is empty if it is then adding admin entry
+if not users:
+    admin_data = {
+        'Name' : 'Admin',
+        'Email' : 'admin@system.com',
+        'Username': 'admin',
+        'Password' : 'admin321'
+    }
+
+    users['A000'] = admin_data
+    save_users(users)
+
 #determing the userid
 if users:
     counter = max(int(u[1:]) for u in users.keys()) + 1
@@ -28,7 +41,7 @@ while True:
     clear_screen()
     header("Authentication System")
     space()
-    menu_items = ["Login", "Register new User", "Exit"]
+    menu_items = ["Login", "Register new User", "Admin Access", "Exit"]
     
     #Menu
     menu_panel(menu_items)
@@ -48,6 +61,8 @@ while True:
     elif choice == "2":
         register_user(users, counter)
     elif choice == "3":
+        admin_dash(users)
+    elif choice == "4":
         space(2)
         fake_loading("Saving data ")
         save_users(users)
