@@ -2,8 +2,9 @@ from .ui import *
 from .theme import *
 from .sessions import *
 from .validators import validate_password
+from .storage import save_users
 
-def dashboard(user):
+def dashboard(user, users):
     global username
     clear_screen()
     username = user['Username']
@@ -27,13 +28,13 @@ def dashboard(user):
     if dash_choice == "1":
         show_profile(user)
     elif dash_choice == "2":
-        update_profile(user)
+        update_profile(user, users)
         
     elif dash_choice == "3":
-        update_password(user)
+        update_password(user, users)
         status("Returning to dashboard", 1)
     elif dash_choice == "4":
-        delete_profile(user)
+        delete_profile(user, users)
     elif dash_choice == "5":
         end_session()
         status("\nLogging Out ...", 1)
@@ -53,7 +54,7 @@ def show_profile(user):
 
         
 
-def update_profile(user):
+def update_profile(user, users):
     clear_screen()
     header("Update Name")
     old_name = user["Name"]
@@ -65,6 +66,7 @@ def update_profile(user):
     space()
     if new_name:
         user['Name'] = new_name
+        save_users(users)
         space()
         success_panel(f"Name updated from {old_name} to {new_name}")
         space()
@@ -72,7 +74,7 @@ def update_profile(user):
         status("Returning to dashboard", 0.5)
 
 
-def update_password(user):
+def update_password(user, users):
     clear_screen()
     header("Update password",)
     space()
@@ -92,6 +94,7 @@ def update_password(user):
             
                 if password == confirm:
                     user['Password'] = password
+                    save_users(users)
                     space()
                     success_panel("Password is Updated")
                     break
@@ -102,8 +105,26 @@ def update_password(user):
     
 
 
-def delete_profile(user):
+def delete_profile(user, users):
     clear_screen()
-    console.print("Deleting Profile Feature comming soon!", style=SUCCESS)
+    header("Profile Delete")
     space()
+    info_panel("By doing this action you are deleting your \nprofile for forever and it cannot be undone.")
+    space()
+    error_panel("Enter 'DELETE' to confirm the account deletation")
+    confirm = get_input("")
+    space()
+    if not confirm:
+        warn("Incorrect, Cancelling the process")
+        sleep(1.5)
+        return
+    elif confirm != "DELETE":
+        warn("Confirmation command didn't match")
+        sleep(1.5)
+        return
+    else:
+        del user
+        success_panel("Profile Deleted")
+        sleep(2)
+        
     wait_for_enter()
