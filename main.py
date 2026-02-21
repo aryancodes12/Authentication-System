@@ -2,7 +2,11 @@ import os
 from auth.storage import load_users, save_users
 from auth.register import register_user
 from auth.login import login
-from auth.ui import *
+
+from auth.ui import (clear_screen, sleep, header, info_panel, menu_panel, 
+success, success_panel, warn, warn_panel, error, error_panel, status, 
+fake_loading, space, get_choice, get_input, wait_for_enter, animated_logo)
+
 from auth.dashboard import *
 from auth.sessions import *
 
@@ -39,7 +43,7 @@ while True:
 
             while is_logged_in():
                 current = get_current_user()
-                dashboard(current, users)
+                user_dashboard(current, users)
         
     elif choice == "2":
         register_user(users, counter)

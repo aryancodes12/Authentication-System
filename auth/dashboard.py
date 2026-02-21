@@ -4,7 +4,7 @@ from .sessions import *
 from .validators import validate_password
 from .storage import save_users
 
-def dashboard(user, users):
+def user_dashboard(user, users):
     global username
     clear_screen()
     username = user['Username']
@@ -26,15 +26,15 @@ def dashboard(user, users):
     dash_choice = get_choice("Select option (1-5)")
 
     if dash_choice == "1":
-        show_profile(user)
+        show_user_profile(user)
     elif dash_choice == "2":
-        update_profile(user, users)
+        update_user_profile_name(user, users)
         
     elif dash_choice == "3":
-        update_password(user, users)
+        update_user_password(user, users)
         status("Returning to dashboard", 1)
     elif dash_choice == "4":
-        delete_profile(user, users)
+        delete_user_profile(user, users)
     elif dash_choice == "5":
         end_session()
         status("\nLogging Out ...", 1)
@@ -43,7 +43,7 @@ def dashboard(user, users):
         error("Invalid choice")
 
 
-def show_profile(user):
+def show_user_profile(user):
     clear_screen()
     status("Loading information...", 0.6)
     header("Account Information")
@@ -54,7 +54,7 @@ def show_profile(user):
 
         
 
-def update_profile(user, users):
+def update_user_profile_name(user, users):
     clear_screen()
     header("Update Name")
     old_name = user["Name"]
@@ -74,7 +74,7 @@ def update_profile(user, users):
         status("Returning to dashboard", 0.5)
 
 
-def update_password(user, users):
+def update_user_password(user, users):
     clear_screen()
     header("Update password",)
     space()
@@ -105,7 +105,7 @@ def update_password(user, users):
     
 
 
-def delete_profile(user, users):
+def delete_user_profile(user, users):
     clear_screen()
     header("DELETE ACCOUNT")
     space()
