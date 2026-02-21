@@ -107,24 +107,70 @@ def update_password(user, users):
 
 def delete_profile(user, users):
     clear_screen()
-    header("Profile Delete")
+    header("DELETE ACCOUNT")
     space()
-    info_panel("By doing this action you are deleting your \nprofile for forever and it cannot be undone.")
+    warn_panel("PERMANENT DELETION WARNING \n\n"
+    "By performing this action, you are permenently\n"
+    "deleting your account. This action CANNOT be undone.\n\n"
+    f"Account to be deleted:\n"
+    f"- Name: {user['Name']}\n"
+    f"- Username: {user['Username']}\n"
+    f"- Email: {user['Email']}\n",
+    title="WARNING"
+    )
+    space()
+
+    password = get_input("Enter password to verify", password=True)
+
+    if password != user['Password']:
+        space()
+        error_panel("Incorrect password!\nDeletion cancelled for security.")
+        sleep(2)
+        return
+
     space()
     error_panel("Enter 'DELETE' to confirm the account deletation")
-    confirm = get_input("")
     space()
+
+    confirm = get_input("Confirmation")
+
     if not confirm:
-        warn("Incorrect, Cancelling the process")
+        space()
+        warn("No input provided, Cancelling the process")
         sleep(1.5)
         return
-    elif confirm != "DELETE":
-        warn("Confirmation command didn't match")
+    
+    if confirm != "DELETE":
+        warn("Confirmation command didn't match. Cancelling the process.")
         sleep(1.5)
         return
+    
+    username = user['Username']
+    user_id_to_delete = None
+
+    for uid, user_data in users.items():
+        if user_data['Username'] == username:
+            user_id_to_delete = uid
+            break
+    
+    if user_id_to_delete:
+        del users[user_id_to_delete]
+
+        save_users(users)
+        space()
+
+        success_panel(
+            "Account Deleted Successfully!\n\n"
+            f"User '{username} has been permanently removed.\n'"
+            "Thank you for using our system."
+        )
+        space()
+
+        end_session()
+
+        status("Returning to main menu...", 2)
     else:
-        del user
-        success_panel("Profile Deleted")
+        space()
+        error_panel("Error: User not found in database!")
         sleep(2)
-        
-    wait_for_enter()
+
