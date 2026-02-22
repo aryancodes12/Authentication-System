@@ -248,6 +248,7 @@ rich==13.7.0
 - Name updates
 - Password changes
 - Secure logout
+- Account Delete 
 
 ### 🚧 Phase 4: Admin Features (Next)
 - [ ] Admin login credentials
