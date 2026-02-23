@@ -1,5 +1,5 @@
 import os
-from auth.storage import load_users, save_users
+from auth.storage import load_users, save_users, admin_data
 from auth.register import register_user
 from auth.login import login
 from auth.admin_dash import admin_dash
@@ -20,15 +20,17 @@ users = load_users()
 
 #Checking if JSON is empty if it is then adding admin entry
 if not users:
-    admin_data = {
-        'Name' : 'Admin',
-        'Email' : 'admin@system.com',
-        'Username': 'admin',
-        'Password' : 'admin321'
-    }
+    admin_data(users)
+    # admin_data = {
+    #     'Name' : 'Admin',
+    #     'Email' : 'admin@system.com',
+    #     'Username': 'admin',
+    #     'Password' : 'admin321'
+    # }
 
-    users['A000'] = admin_data
-    save_users(users)
+    # users['A000'] = admin_data
+    # save_users(users)
+    
 
 #determing the userid
 if users:
@@ -61,7 +63,7 @@ while True:
     elif choice == "2":
         register_user(users, counter)
     elif choice == "3":
-        admin_dash(users)
+        admin_dash(users, admin_data)
     elif choice == "4":
         space(2)
         fake_loading("Saving data ")
