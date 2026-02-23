@@ -129,8 +129,8 @@ def get_choice(prompt_text = "Select option"):
 
 
 #Table
-def display_user_table(users):
-    table = Table(title = "Registered Users", style=HEADER)
+def display_user_table(users, title = ""):
+    table = Table(title = title, style=HEADER)
 
     table.add_column("User Id", style = SUCCESS)
     table.add_column("Name", style = ACCENT)
