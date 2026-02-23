@@ -12,3 +12,14 @@ def load_users():
 def save_users(users):
     with open(FILE, "w") as f:
         json.dump(users, f, indent = 4)
+
+def admin_data(users):
+    admin_data = {
+        'Name' : 'Admin',
+        'Email' : 'admin@system.com',
+        'Username': 'admin',
+        'Password' : 'admin321'
+    }
+
+    users['A000'] = admin_data
+    save_users(users)
