@@ -88,7 +88,8 @@ On launch, you'll see three options:
 ```
 [1] Login
 [2] Register new User
-[3] Exit
+[3] Admin Access
+[4] Exit
 ```
 
 ### Registration Process
