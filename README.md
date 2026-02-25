@@ -252,12 +252,10 @@ rich==13.7.0
 - Account Delete 
 
 ### 🚧 Phase 4: Admin Features (Next)
-- [ ] Admin login credentials
-- [ ] User management dashboard
-- [ ] View all registered users
-- [ ] Delete user accounts
+- Admin login credentials
+- View all registered users (Complete till here)
+- [ ] Delete user accounts (Working)
 - [ ] User search and filtering
-- [ ] Account status management
 
 ### 📋 Phase 5: Enhanced Security (Planned)
 - [ ] Password hashing with bcrypt
@@ -280,7 +278,6 @@ rich==13.7.0
 - [ ] Session timeout
 - [ ] "Remember Me" functionality
 - [ ] Password reset via email
-- [ ] Web interface (Flask/Django)
 
 ## 🐛 Known Issues
 
