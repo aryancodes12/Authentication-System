@@ -25,6 +25,7 @@ def admin_dash(users):
     if choice == '1':
         clear_screen()
         show_users(users)
+        wait_for_enter()
     elif choice == "4":
         return None
 
@@ -87,7 +88,7 @@ def show_users(users):
     profile = display_user_table(users)
     console.print(profile)
     space()
-    choice = get_choice("Enter 'q' to return")
-    if choice == 'q':
-        return
+    # choice = get_choice("Enter 'q' to return")
+    # if choice == 'q':
+    #     return
     
