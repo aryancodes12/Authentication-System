@@ -67,7 +67,7 @@ while True:
         space()
 
     #Displaying the present data from JSON
-        status("Displaying Data ....", 1)
+        # status("Displaying Data ....", 1)
         space()
         # console.print(display_user_table(users))
         success_panel("👋 Thanks for using the System!")
