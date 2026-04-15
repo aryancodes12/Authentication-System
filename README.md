@@ -254,7 +254,7 @@ rich==13.7.0
 ### 🚧 Phase 4: Admin Features (Next)
 - Admin login credentials
 - View all registered users 
-- [ ] Delete user accounts (Currently working)
+- Delete user accounts 
 - [ ] User search and filtering
 
 ### 📋 Phase 5: Enhanced Security (Planned)
@@ -325,4 +325,4 @@ This is a personal learning project, but feedback and suggestions are welcome!
 
 Built with 💙 by [Aryan Gupta](https://github.com/aryancodes12) | Learning by Building 🚀
 
-*Last Updated: 15 April 2026 | Phase 3 Complete |* 
+*Last Updated: 15 April 2026 | Phase 3 Complete* 
