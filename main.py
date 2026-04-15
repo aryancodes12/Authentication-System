@@ -39,7 +39,7 @@ while True:
     
     #Menu
     menu_panel(menu_items)
-    choice = get_choice("Select option (1-3)")
+    choice = get_choice("Select option (1-4)")
 
     if choice == "1":
         user = login(users)
