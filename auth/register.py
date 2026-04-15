@@ -1,5 +1,6 @@
 from .validators import is_valid_email, is_unique_username, validate_password
 from .ui import *
+from .storage import save_users
 import time
 
 def register_user(users, counter):
@@ -64,5 +65,6 @@ def register_user(users, counter):
     #Success message
     success_panel("Registration Successful!")
     sleep(1.6)
-
+    
+    save_users(users)
     return users, counter + 1
