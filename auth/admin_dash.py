@@ -24,11 +24,12 @@ def admin_dash(users):
     #     return None
 
     if choice == '1':
-        clear_screen()
+        # clear_screen()
         show_users(users)
         
     elif choice == "2":
-        return None
+        clear_screen()
+        delete_user(users)
     elif choice == "3":
         return None
     elif choice == "4":
@@ -99,7 +100,36 @@ def show_users(users):
     console.print(profile)
     space()
     wait_for_enter("Press 'Enter' to go back")
-    # choice = get_choice("Enter 'q' to return")
-    # if choice == 'q':
-    #     return
+
+
+def delete_user(users):
+    uid = get_input("Enter user's UID to delete or 'q' to quit")
+
+    found = None
+    if uid == 'q':
+        return None
+    elif uid != 'q':
+        for id in users.keys():
+            if uid == id:
+                success_panel("UID Found in database")
+                found = uid
+
     
+        # else:
+        #     warn_panel("UID not found in the database")
+        #     sleep()
+        #     break
+    
+
+    if found:
+        warn_panel("This action is cannot be undone.\n KEYWORD: DESTROY")
+        keyword = "DESTROY"
+        confirm = get_input("Enter KEYWORD to delete")
+
+        if confirm == keyword:
+            del users[found]
+            success_panel("User DESTROYED successfully.")
+            status("Returing to menu...", 1)
+        else:
+            error_panel("Wrong 'KEYWORD' mission aborted")
+            status("Returing to menu...",1)
