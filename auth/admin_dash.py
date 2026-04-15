@@ -1,4 +1,5 @@
 from .ui import *
+from .sessions import end_session
 
 def admin_dash(users):
     clear_screen()
@@ -15,19 +16,28 @@ def admin_dash(users):
 
     choice = get_choice("Select option (1-4)")
 
-    if not choice:
-        space()
-        warn("Invalid choice")
-        space(2)
-        wait_for_enter()
-        return None
+    # if not choice:
+    #     space()
+    #     warn("Invalid choice")
+    #     space(2)
+    #     wait_for_enter()
+    #     return None
 
     if choice == '1':
         clear_screen()
         show_users(users)
-        wait_for_enter()
-    elif choice == "4":
+        
+    elif choice == "2":
         return None
+    elif choice == "3":
+        return None
+    elif choice == "4":
+        end_session()
+        status("\nLogging Out ...", 1)
+        status("\nReturning to Main Menu ...", 1)
+    else:
+        space()
+        warn("Invalid Choice")
 
     
 
@@ -88,6 +98,7 @@ def show_users(users):
     profile = display_user_table(users)
     console.print(profile)
     space()
+    wait_for_enter("Press 'Enter' to go back")
     # choice = get_choice("Enter 'q' to return")
     # if choice == 'q':
     #     return
