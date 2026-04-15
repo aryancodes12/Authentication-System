@@ -253,8 +253,8 @@ rich==13.7.0
 
 ### 🚧 Phase 4: Admin Features (Next)
 - Admin login credentials
-- View all registered users (Complete till here)
-- [ ] Delete user accounts (Working)
+- View all registered users 
+- [ ] Delete user accounts (Currently working)
 - [ ] User search and filtering
 
 ### 📋 Phase 5: Enhanced Security (Planned)
@@ -271,17 +271,9 @@ rich==13.7.0
 - [ ] Connection pooling
 - [ ] Prepared statements
 
-### 📋 Phase 7: Advanced Features (Future)
-- [ ] Two-factor authentication (2FA)
-- [ ] Email verification system
-- [ ] Activity logging and audit trail
-- [ ] Session timeout
-- [ ] "Remember Me" functionality
-- [ ] Password reset via email
-
 ## 🐛 Known Issues
 
-- Email validation currently only accepts @gmail.com addresses *(will be fixed to accept all valid email formats)*
+- Email validation currently only accepts @gmail.com addresses 
 - Passwords stored in plain text *(will be fixed with bcrypt hashing in Phase 5)*
 - Session doesn't persist after application restart
 - No password recovery mechanism yet
@@ -333,4 +325,4 @@ This is a personal learning project, but feedback and suggestions are welcome!
 
 Built with 💙 by [Aryan Gupta](https://github.com/aryancodes12) | Learning by Building 🚀
 
-*Last Updated: February 2026 | Phase 3 Complete*
+*Last Updated: 15 April 2026 | Phase 3 Complete |* 
