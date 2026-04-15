@@ -1,5 +1,6 @@
 from .ui import *
 from .sessions import end_session
+from .storage import save_users
 
 def admin_dash(users):
     clear_screen()
@@ -16,14 +17,12 @@ def admin_dash(users):
 
     choice = get_choice("Select option (1-4)")
 
-    # if not choice:
-    #     space()
-    #     warn("Invalid choice")
-    #     space(2)
-    #     wait_for_enter()
-    #     return None
-
-    if choice == '1':
+    if not choice:
+        space()
+        warn("Invalid choice")
+        sleep(1)
+        space(2)
+    elif choice == '1':
         # clear_screen()
         show_users(users)
         
@@ -40,7 +39,7 @@ def admin_dash(users):
         space()
         warn("Invalid Choice")
 
-    
+
 
 
 def admin_login(users):
@@ -102,7 +101,10 @@ def show_users(users):
     wait_for_enter("Press 'Enter' to go back")
 
 
+#DELETE USERS
 def delete_user(users):
+    header("REGISTERED USERS")
+
     uid = get_input("Enter user's UID to delete or 'q' to quit")
 
     found = None
@@ -112,23 +114,27 @@ def delete_user(users):
         for id in users.keys():
             if uid == id:
                 success_panel("UID Found in database")
-                found = uid
+                found = id
+                break
 
-    
-        # else:
-        #     warn_panel("UID not found in the database")
-        #     sleep()
-        #     break
-    
+    if not found:
+        error_panel("UID not found in the database")
+        status("Returning to menu ...", 1)
+        return None
 
     if found:
         warn_panel("This action is cannot be undone.\n KEYWORD: DESTROY")
         keyword = "DESTROY"
-        confirm = get_input("Enter KEYWORD to delete")
+        confirm = get_input("Enter KEYWORD to delete or 'q' to quit")
 
+        if confirm == 'q':
+            return None
+        
         if confirm == keyword:
             del users[found]
+            save_users(users)
             success_panel("User DESTROYED successfully.")
+            
             status("Returing to menu...", 1)
         else:
             error_panel("Wrong 'KEYWORD' mission aborted")
