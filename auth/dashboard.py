@@ -40,7 +40,7 @@ def user_dashboard(user, users):
         status("\nLogging Out ...", 1)
         status("\nReturning to Main Menu ...", 1)
     else:
-        error("Invalid choice")
+        warn("Invalid choice")
 
 
 def show_user_profile(user):
@@ -61,7 +61,6 @@ def update_user_profile_name(user, users):
     space()
     info(f"Current Name: {old_name}")
 
-    # console.print("Enter new name to update", style = "cyan")
     new_name = get_input("Enter new name to update")
     space()
     if new_name:
@@ -100,9 +99,7 @@ def update_user_password(user, users):
                     break
                 else:
                     error("❌ Passwords don't match!")
-            
 
-    
 
 
 def delete_user_profile(user, users):
