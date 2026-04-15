@@ -45,7 +45,6 @@ while True:
         user = login(users)
         clear_screen()
         if user:
-            # status("Starting session...", 1)
             start_session(user)
 
             while is_logged_in():
@@ -58,7 +57,9 @@ while True:
         admin = admin_login(users)
         clear_screen()
         if admin:
-            admin_dash(users)
+            start_session(admin)
+            while is_logged_in():
+                admin_dash(users)
     elif choice == "4":
         space(2)
         fake_loading("Saving data ")
@@ -66,10 +67,7 @@ while True:
 
         space()
 
-    #Displaying the present data from JSON
-        # status("Displaying Data ....", 1)
         space()
-        # console.print(display_user_table(users))
         success_panel("👋 Thanks for using the System!")
         break
     else:
