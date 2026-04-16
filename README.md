@@ -6,6 +6,10 @@ A terminal-based authentication system built from scratch in Python with a cyber
 ![Status](https://img.shields.io/badge/status-active-success)
 ![Phase](https://img.shields.io/badge/phase-3%20complete-orange)
 
+## 🎥 Demo
+▶️ [Watch full demo](./asset/demo.mp4)
+
+
 ## ✨ Features
 
 ### 🔐 **Core Authentication**
