@@ -255,13 +255,13 @@ rich==13.7.0
 - Secure logout
 - Account Delete 
 
-### 🚧 Phase 4: Admin Features (Next)
+### 🚧 Phase 4: Admin Features 
 - Admin login credentials
 - View all registered users 
 - Delete user accounts 
-- [ ] User search and filtering
+- User search and filtering
 
-### 📋 Phase 5: Enhanced Security (Planned)
+### 📋 Phase 5: Enhanced Security (Next)
 - [ ] Password hashing with bcrypt
 - [ ] Password strength meter
 - [ ] Security questions for recovery
@@ -272,8 +272,6 @@ rich==13.7.0
 - [ ] MySQL database setup
 - [ ] Database schema design
 - [ ] Migration from JSON to MySQL
-- [ ] Connection pooling
-- [ ] Prepared statements
 
 ## 🐛 Known Issues
 
@@ -329,4 +327,4 @@ This is a personal learning project, but feedback and suggestions are welcome!
 
 Built with 💙 by [Aryan Gupta](https://github.com/aryancodes12) | Learning by Building 🚀
 
-*Last Updated: 15 April 2026 | Phase 3 Complete* 
+*Last Updated: 27 April 2026 | Phase 4 Complete* 
