@@ -31,7 +31,25 @@ def admin_dash(users):
         delete_user(users)
     elif choice == "3":
         clear_screen()
-        search(users)
+        header("Search and Filter users")
+
+        query = get_input("Search user by Name/Email/Username/UID: ").strip()
+
+        if not query:
+            warn("Search input cannot be empty")
+            
+
+        results = search(users, query)
+
+        if results:
+            success_panel(f"Result found {len(results)} user(s)\n")
+
+            
+
+        else:
+            warn("User not found")
+
+
     elif choice == "4":
         end_session()
         status("\nLogging Out ...", 1)
@@ -142,17 +160,15 @@ def delete_user(users):
             status("Returing to menu...",1)
 
 
-def search(users):
-    header("Search users")
+def search(users, query):
+    result = []
+    query = query.lower().strip()
 
-    search = get_input("Enter Name/Email/Username to search user: ")
-    user_list = []
-    
-    #for loop
-    for user in users.values():
-        name = user['Name']
-        user_list.append(name)
-    
-    print(user_list)
-    sleep(4)
-    wait_for_enter()
+    for uid, data in users.items():
+        if (query in data['Name'].lower() or
+            query in data['Email'].lower() or
+            query in data["Username"].lower() or
+            query == uid.lower()):
+            result.append((uid, data))
+
+    return result
