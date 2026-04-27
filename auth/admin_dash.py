@@ -30,7 +30,8 @@ def admin_dash(users):
         clear_screen()
         delete_user(users)
     elif choice == "3":
-        return None
+        clear_screen()
+        search(users)
     elif choice == "4":
         end_session()
         status("\nLogging Out ...", 1)
@@ -139,3 +140,19 @@ def delete_user(users):
         else:
             error_panel("Wrong 'KEYWORD' mission aborted")
             status("Returing to menu...",1)
+
+
+def search(users):
+    header("Search users")
+
+    search = get_input("Enter Name/Email/Username to search user: ")
+    user_list = []
+    
+    #for loop
+    for user in users.values():
+        name = user['Name']
+        user_list.append(name)
+    
+    print(user_list)
+    sleep(4)
+    wait_for_enter()
