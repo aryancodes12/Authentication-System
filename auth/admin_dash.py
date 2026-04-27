@@ -33,21 +33,36 @@ def admin_dash(users):
         clear_screen()
         header("Search and Filter users")
 
-        query = get_input("Search user by Name/Email/Username/UID: ").strip()
-
-        if not query:
-            warn("Search input cannot be empty")
-            
+        query = get_input("Search user by Name/Email/Username/UID ").strip()
 
         results = search(users, query)
-
+        
+        
+        
         if results:
             success_panel(f"Result found {len(results)} user(s)\n")
 
-            
+            table = Table(style=HEADER)
 
+            table.add_column("User Id", style = SUCCESS)
+            table.add_column("Name", style = ACCENT)
+            table.add_column("Email", style = WARNING)
+            table.add_column("Username", style = PRIMARY)
+
+            for uid, info in results:
+                table.add_row(
+                uid,
+                info["Name"],
+                info["Email"],
+                info["Username"]
+                )
+            console.print(table)
+            wait_for_enter()
+            status("Returing to the menu... ", 0.5)
         else:
             warn("User not found")
+            sleep(4)
+            status("Returing to the menu... ", 0.5)
 
 
     elif choice == "4":
