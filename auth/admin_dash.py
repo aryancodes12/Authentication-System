@@ -60,7 +60,8 @@ def admin_dash(users):
             wait_for_enter()
             status("Returing to the menu... ", 0.5)
         else:
-            warn("User not found")
+            print()
+            warn_panel("User not found")
             sleep(4)
             status("Returing to the menu... ", 0.5)
 
