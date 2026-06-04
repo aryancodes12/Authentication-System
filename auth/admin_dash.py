@@ -1,6 +1,7 @@
 from .ui import *
 from .sessions import end_session
 from .storage import save_users
+import bcrypt
 
 def admin_dash(users):
     clear_screen()
@@ -107,9 +108,9 @@ def admin_login(users):
         while attempts > 0:
             space()
             warn_panel(f"{attempts} attempts left")
-            password = get_input("Password", password=True)
+            entered_password = get_input("Password", password=True)
 
-            if password == user["Password"]:
+            if bcrypt.checkpw(entered_password.encode('utf-8'), u["Password"].encode('utf-8')):
                 space(2)
                 success_panel(f"Welcome back, {user['Name']}!")
                 space()
