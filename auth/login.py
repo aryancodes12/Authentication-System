@@ -1,4 +1,5 @@
 from .ui import *
+import bcrypt
 
 def login(users):
     clear_screen()
@@ -21,7 +22,6 @@ def login(users):
         if not user:
             space()
             error_panel("User not Found")
-            space(2)
             wait_for_enter()
             return None
 
@@ -30,9 +30,10 @@ def login(users):
         while attempts > 0:
             space()
             warn_panel(f"{attempts} attempts left")
-            password = get_input("Password", password=True)
+            entered_Password = get_input("Password", password=True)
 
-            if password == user["Password"]:
+            if bcrypt.checkpw(entered_Password.encode('utf-8'), user["Password"].encode('utf-8')):
+
                 space(2)
                 success_panel(f"Welcome back, {user['Name']}!")
                 space()
@@ -46,5 +47,5 @@ def login(users):
                 else:
                     space()
                     error_panel("Too many failed attempts")
-                    status("Returning to main menu...", 1)
+                    status("Returning to main menu...", 0.5)
                     return None
