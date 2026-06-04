@@ -1,13 +1,16 @@
 # 🔐 Authentication System
 
-A terminal-based authentication system built from scratch in Python with a cyberpunk-themed UI. This project demonstrates core authentication concepts, clean code architecture, and modern terminal interface design.
+A modular terminal-based authentication system built from scratch in Python with a cyberpunk-themed UI. Designed as a hands-on learning project, it explores real-world authentication, security fundamentals, clean architecture, and backend development concepts.
+
 
 ![Python Version](https://img.shields.io/badge/python-3.6%2B-blue)
 ![Status](https://img.shields.io/badge/status-active-success)
-![Phase](https://img.shields.io/badge/phase-3%20complete-orange)
+![Phase](https://img.shields.io/badge/phase-5%20complete-orange)
 
 ## 🎥 Demo
 ▶️ [Watch full demo](./asset/demo.mp4)
+<br><br>
+📷 Hashed password demo ![Hashed password demo](./asset/hashed_pw.png)
 
 
 ## ✨ Features
@@ -189,7 +192,7 @@ Sunset, Ocean, Forest, Hacker Terminal, Dark Purple, Fire, Rainbow, Electric, Mo
 ## 🔐 Security Implementation
 
 ### Current Security Features
-✅ Password validation (length, complexity)  
+✅ Password validation
 ✅ Login attempt limiting (3 tries)  
 ✅ Session state management  
 ✅ Input sanitization  
@@ -198,7 +201,6 @@ Sunset, Ocean, Forest, Hacker Terminal, Dark Purple, Fire, Rainbow, Electric, Mo
 ### ⚠️ Security Limitations (Educational Project)
 
 **DO NOT use in production without implementing:**
-- ❌ Password hashing (currently plain text)
 - ❌ Database encryption
 - ❌ HTTPS/SSL
 - ❌ Rate limiting
@@ -215,22 +217,24 @@ These features are planned for future phases (see Roadmap).
 | **Language** | Python 3.6+ | Core application logic |
 | **Terminal UI** | [Rich](https://github.com/Textualize/rich) | Beautiful terminal formatting |
 | **Data Storage** | JSON | User data persistence |
+| **Password Security** | Bcrypt| Password hashing |
 | **Architecture** | Modular | Clean separation of concerns |
 
 **Dependencies:**
 ```
-rich==13.7.0
+bcrypt==5.0.0
+rich==14.3.1
 ```
 
 ## 📊 Project Statistics
 
-- **Total Lines of Code:** 600+
-- **Python Files:** 8 modular files
+- **Total Lines of Code:** 800+
+- **Python Files:** 10 modular files
 - **UI Components:** 25+
 - **Themes Available:** 15
-- **Commits:** 25+
-- **Development Time:** 3 weeks
-- **Current Phase:** 3 (Complete)
+- **Commits:** 110+
+- **Development Time:** 5 months (with major breaks in between)
+- **Current Phase:** 5 (Complete)
 
 ## 🗺️ Development Roadmap
 
@@ -255,20 +259,20 @@ rich==13.7.0
 - Secure logout
 - Account Delete 
 
-### 🚧 Phase 4: Admin Features 
+### ✅ Phase 4: Admin Features (Complete)
 - Admin login credentials
 - View all registered users 
 - Delete user accounts 
 - User search and filtering
 
-### 📋 Phase 5: Enhanced Security (Next)
-- [ ] Password hashing with bcrypt
-- [ ] Password strength meter
-- [ ] Security questions for recovery
-- [ ] Account lockout after failed attempts
-- [ ] Password history (prevent reuse)
+### 🚧 Phase 5: Enhanced Security (Partial)
+- Password hashing with bcrypt
+- [ ] Password strength meter (will be done after phase 6 to reduce complexity)
+- [ ] Security questions for recovery (will be done after phase 6 to reduce complexity)
+- [ ] Account lockout after failed attempts (will be done after phase 6 to reduce complexity)
+- [ ] Password history (prevent reuse) (will be done after phase 6 to reduce complexity)
 
-### 📋 Phase 6: Database Integration (Planned)
+### 📋 Phase 6: Database Integration (starting soon)
 - [ ] MySQL database setup
 - [ ] Database schema design
 - [ ] Migration from JSON to MySQL
@@ -276,7 +280,6 @@ rich==13.7.0
 ## 🐛 Known Issues
 
 - Email validation currently only accepts @gmail.com addresses 
-- Passwords stored in plain text *(will be fixed with bcrypt hashing in Phase 5)*
 - Session doesn't persist after application restart
 - No password recovery mechanism yet
 
@@ -327,4 +330,4 @@ This is a personal learning project, but feedback and suggestions are welcome!
 
 Built with 💙 by [Aryan Gupta](https://github.com/aryancodes12) | Learning by Building 🚀
 
-*Last Updated: 27 April 2026 | Phase 4 Complete* 
+*Last Updated: 4 June 2026 | Phase 5 Complete* 
