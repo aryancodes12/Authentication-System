@@ -2,6 +2,7 @@ from .validators import is_valid_email, is_unique_username, validate_password
 from .ui import *
 from .storage import save_users
 import time
+import bcrypt
 
 def register_user(users, counter):
     clear_screen()
@@ -46,12 +47,12 @@ def register_user(users, counter):
             confirm = get_input("Confirm password")
             
             if password == confirm:
+                hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
                 space()
+
                 break
             else:
                 error("❌ Passwords don't match!")
-        # else:
-        #     warn()
 
 #Storing in Dict
     user_id = f"u{counter:03d}"
@@ -59,7 +60,7 @@ def register_user(users, counter):
         "Name" : full_name,
         "Email" : email,
         "Username" : username,
-        "Password" : password
+        "Password" : hashed_password.decode('utf-8'), # Store hashed password as string,
     }
 
     #Success message
