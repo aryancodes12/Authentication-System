@@ -1,5 +1,5 @@
 import pymysql
-from db import get_db
+from .get_db import get_db
 
 try:
     conn = cursor = None
