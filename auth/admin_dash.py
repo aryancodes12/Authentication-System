@@ -2,6 +2,7 @@ from .ui import *
 from .sessions import end_session
 from .storage import save_users
 import bcrypt
+from database.select import select_all_users
 
 def admin_dash(users):
     clear_screen()
@@ -17,6 +18,7 @@ def admin_dash(users):
     menu_panel(menu_items)
 
     choice = get_choice("Select option (1-4)")
+    
 
     if not choice:
         space()
@@ -25,8 +27,11 @@ def admin_dash(users):
         space(2)
     elif choice == '1':
         # clear_screen()
-        show_users(users)
-        
+        # show_users(users)
+        data = select_all_users()
+        console.print(display_user_table(data, title="Registered Users"))
+        sleep(6)
+
     elif choice == "2":
         clear_screen()
         delete_user(users)
@@ -127,14 +132,14 @@ def admin_login(users):
                     status("Returning to main menu...", 1)
                     return None
 
-def show_users(users):
-    clear_screen()
-    status("Loading information...", 0.4)
-    header("REGISTERED USERS")
-    profile = display_user_table(users)
-    console.print(profile)
-    space()
-    wait_for_enter("Press 'Enter' to go back")
+# def show_users(users):
+#     clear_screen()
+#     status("Loading information...", 0.4)
+#     header("REGISTERED USERS")
+#     profile = display_user_table(users)
+#     console.print(profile)
+#     space()
+#     wait_for_enter("Press 'Enter' to go back")
 
 
 #DELETE USERS
