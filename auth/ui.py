@@ -136,13 +136,17 @@ def display_user_table(users, title = ""):
     table.add_column("Name", style = ACCENT)
     table.add_column("Email", style = WARNING)
     table.add_column("Username", style = PRIMARY)
+    table.add_column("Created At", style = MUTED)
 
-    for uid, info in users.items():
+
+
+    for user in users:
         table.add_row(
-            uid,
-            info["Name"],
-            info["Email"],
-            info["Username"]
+            str(user["id"]),
+            user["name"],
+            user["username"],
+            user["email"],
+            str(user["created_at"])
         )
 
     return table
