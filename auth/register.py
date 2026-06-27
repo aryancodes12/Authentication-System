@@ -2,6 +2,7 @@ from .validators import is_valid_email, is_unique_username, validate_password
 from .ui import *
 from .storage import save_users
 from database.insert import insert_user
+from database.select import is_username_exists, is_email_exists
 
 import time
 import bcrypt
@@ -22,20 +23,22 @@ def register_user(users, counter):
     while True:
         space()
         email = get_input("Enter Email id")
-        if is_valid_email(email):
-            break
-        space()
-        error("Invalid Email")
+        if is_email_exists(email):
+            space()
+            warn("Email already registered. Try different Email")
+            continue
+        break
 
     #Username Creation
     while True:
         space()
         username = get_input("create Username").lower()
-        if is_unique_username(username, users):
-            break
-        else:
+
+        if is_username_exists(username):
             space()
-            warn_panel("Username already taken")
+            warn("Username already taken. Try different username")
+            continue
+        break
 
     #Password Creation
     while True:
