@@ -154,9 +154,10 @@ def display_user_table(users, title = ""):
 
 def profile_table(user):
     table = Table(show_header=False, box=None)
-    table.add_row(f"[{PRIMARY}]Name:[/{PRIMARY}]", f"[{ACCENT}]{user['Name']}[/{ACCENT}]")
-    table.add_row(f"[{PRIMARY}]Email:[/{PRIMARY}]", f"[{ACCENT}]{user['Email']}[/{ACCENT}]")
-    table.add_row(f"[{PRIMARY}]Username:[/{PRIMARY}]", f"[{ACCENT}]{user['Username']}[/{ACCENT}]")
+    table.add_row(f"[{PRIMARY}]Name:[/{PRIMARY}]", f"[{ACCENT}]{user['name']}[/{ACCENT}]")
+    table.add_row(f"[{PRIMARY}]Email:[/{PRIMARY}]", f"[{ACCENT}]{user['email']}[/{ACCENT}]")
+    table.add_row(f"[{PRIMARY}]Username:[/{PRIMARY}]", f"[{ACCENT}]{user['username']}[/{ACCENT}]")
+    table.add_row(f"[{PRIMARY}]Created At:[/{PRIMARY}]", f"[{ACCENT}]{user['created_at']}[/{ACCENT}]")
     table.add_row(f"[{PRIMARY}]Status:[/{PRIMARY}]", f"[{SUCCESS}]✓ Active[/{SUCCESS}]")
 
     return table
@@ -180,7 +181,7 @@ def animated_logo():
         console.print(line, style=PRIMARY)
         sleep(0.05)
 
-    console.print(f"\n[{GLOW}]▂▃▅▇█▓▒░ AUTHENTICATION SYSTEM ░▒▓█▇▅▃▂[/{GLOW}]" + f"\n[{SUBHEADER}]              by Aryan[/{SUBHEADER}]")
+    console.print(f"\n[{GLOW}]▂▃▅▇█▓▒░ AUTHENTICATION SYSTEM ░▒▓█▇▅▃▂[/{GLOW}]" + f"\n[{SUBHEADER}]              by Aryan Gupta[/{SUBHEADER}]")
     sleep(0.5)
 
 
