@@ -42,7 +42,8 @@ while True:
     choice = get_choice("Select option (1-4)")
 
     if choice == "1":
-        user = login(users)
+        #remove the users argument from login fucn
+        user = login()
         clear_screen()
         if user:
             start_session(user)
