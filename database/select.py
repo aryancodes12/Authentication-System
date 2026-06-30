@@ -27,6 +27,27 @@ def select_all_users():
         if cursor: cursor.close()
         if conn: conn.close()
 
+#SELECT only one user to maintain session
+def select_one_user_info(username):
+    try:
+        conn = cursor = None
+        conn = get_db()
+        cursor = conn.cursor()
+
+        query = """SELECT * FROM users WHERE username = %s"""
+
+        cursor.execute(query, (username),)
+
+        user_info = cursor.fetchone()
+        
+        return user_info
+        
+    except pymysql.MySQLError as e:
+        print(f"\nError: {e}\n")
+
+    finally:
+        if cursor: cursor.close()
+        if conn: conn.close()
 
 #SELECTING USERNAME TO CHECK IF IT'S UNIQUE
 def is_username_exists(username):
