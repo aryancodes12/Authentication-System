@@ -77,5 +77,5 @@ def register_user(users, counter):
     success_panel("Registration Successful!")
     sleep(1.6)
     
-    save_users(users)
-    return users, counter + 1
+    # save_users(users)
+    # return users, counter + 1
