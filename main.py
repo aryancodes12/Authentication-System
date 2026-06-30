@@ -50,7 +50,7 @@ while True:
 
             while is_logged_in():
                 current = get_current_user()
-                user_dashboard(current, users)
+                user_dashboard(current)
         
     elif choice == "2":
         register_user(users, counter)
