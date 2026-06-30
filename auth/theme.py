@@ -144,33 +144,33 @@
 # ═══════════════════════════════════════════════════════════════
 
 # # === MAIN COLORS ===
-PRIMARY = "bright_green"          # Matrix green
-SECONDARY = "green"               # Darker matrix
-ACCENT = "chartreuse1"            # Bright terminal
+# PRIMARY = "bright_green"          # Matrix green
+# SECONDARY = "green"               # Darker matrix
+# ACCENT = "chartreuse1"            # Bright terminal
 
-# === STATUS COLORS ===
-SUCCESS = "bright_green"          # Access granted
-ERROR = "bright_red"              # Access denied
-WARNING = "bright_yellow"         # Warning
-INFO = "green"                    # Info
+# # === STATUS COLORS ===
+# SUCCESS = "bright_green"          # Access granted
+# ERROR = "bright_red"              # Access denied
+# WARNING = "bright_yellow"         # Warning
+# INFO = "green"                    # Info
 
-# === TEXT STYLES ===
-HEADER = "bold bright_green"
-SUBHEADER = "green"
-MUTED = "dim green"
-HIGHLIGHT = "bold chartreuse1"
+# # === TEXT STYLES ===
+# HEADER = "bold bright_green"
+# SUBHEADER = "green"
+# MUTED = "dim green"
+# HIGHLIGHT = "bold chartreuse1"
 
-# === BORDERS ===
-BORDER_PRIMARY = "bright_green"
-BORDER_ACCENT = "green"
-BORDER_SUCCESS = "bright_green"
-BORDER_WARNING = "bright_yellow"
-BORDER_ERROR = "bright_red"
+# # === BORDERS ===
+# BORDER_PRIMARY = "bright_green"
+# BORDER_ACCENT = "green"
+# BORDER_SUCCESS = "bright_green"
+# BORDER_WARNING = "bright_yellow"
+# BORDER_ERROR = "bright_red"
 
-# === SPECIAL ===
-GLOW = "bold bright_green"
-PANEL = "bright_green"
-RULE = "green"
+# # === SPECIAL ===
+# GLOW = "bold bright_green"
+# PANEL = "bright_green"
+# RULE = "green"
 
 
 # ═══════════════════════════════════════════════════════════════
@@ -284,33 +284,33 @@ RULE = "green"
 # ═══════════════════════════════════════════════════════════════
 
 # # === MAIN COLORS ===
-# PRIMARY = "bright_yellow"         # Lightning
-# SECONDARY = "bright_cyan"         # Electric blue
-# ACCENT = "bright_magenta"         # Plasma pink
+PRIMARY = "bright_yellow"         # Lightning
+SECONDARY = "bright_cyan"         # Electric blue
+ACCENT = "bright_magenta"         # Plasma pink
 
-# # === STATUS COLORS ===
-# SUCCESS = "bright_green"
-# ERROR = "bright_red"
-# WARNING = "bright_yellow"
-# INFO = "bright_cyan"
+# === STATUS COLORS ===
+SUCCESS = "bright_green"
+ERROR = "bright_red"
+WARNING = "bright_yellow"
+INFO = "bright_cyan"
 
-# # === TEXT STYLES ===
-# HEADER = "bold bright_yellow"
-# SUBHEADER = "bright_cyan"
-# MUTED = "dim yellow"
-# HIGHLIGHT = "bold bright_magenta"
+# === TEXT STYLES ===
+HEADER = "bold bright_yellow"
+SUBHEADER = "bright_cyan"
+MUTED = "dim yellow"
+HIGHLIGHT = "bold bright_magenta"
 
-# # === BORDERS ===
-# BORDER_PRIMARY = "bright_yellow"
-# BORDER_ACCENT = "bright_cyan"
-# BORDER_SUCCESS = "bright_green"
-# BORDER_WARNING = "bright_yellow"
-# BORDER_ERROR = "bright_red"
+# === BORDERS ===
+BORDER_PRIMARY = "bright_yellow"
+BORDER_ACCENT = "bright_cyan"
+BORDER_SUCCESS = "bright_green"
+BORDER_WARNING = "bright_yellow"
+BORDER_ERROR = "bright_red"
 
-# # === SPECIAL ===
-# GLOW = "bold bright_yellow"
-# PANEL = "bright_yellow"
-# RULE = "bright_cyan"
+# === SPECIAL ===
+GLOW = "bold bright_yellow"
+PANEL = "bright_yellow"
+RULE = "bright_cyan"
 
 
 # ═══════════════════════════════════════════════════════════════
