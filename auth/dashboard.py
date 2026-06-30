@@ -1,9 +1,12 @@
+import bcrypt
 from .ui import *
 from .theme import *
 from .sessions import *
 from .validators import validate_password
 from .storage import save_users
 from database.select import select_one_user_info
+from database.update import update_user_name, update_user_password
+from database.delete import delete_user
 
 def user_dashboard(user):
     global username
@@ -34,7 +37,7 @@ def user_dashboard(user):
         update_user_profile_name(user_info)
         
     elif dash_choice == "3":
-        update_user_password(user_info)
+        update_user_pass(user_info)
         status("Returning to dashboard", 1)
     elif dash_choice == "4":
         delete_user_profile(user_info)
@@ -46,55 +49,57 @@ def user_dashboard(user):
         warn("Invalid choice")
 
 
-def show_user_profile(user):
+def show_user_profile(user_info):
     clear_screen()
     status("Loading information...", 0.6)
     header("Account Information")
-    profile = profile_table(user)
+    profile = profile_table(user_info)
     console.print(profile)
     space()
     wait_for_enter("Press Enter to go back")
 
 
-def update_user_profile_name(user):
+def update_user_profile_name(user_info):
     clear_screen()
     header("Update Name")
-    old_name = user["name"]
+    old_name = user_info["name"]
     space()
     info(f"Current Name: {old_name}")
 
-    new_name = get_input("Enter new name to update")
+    new_name = get_input("Enter new name to update").strip()
     space()
     if new_name:
-        user['name'] = new_name
+        update_user_name(old_name, new_name)
         space()
-        success_panel(f"Name updated from {old_name} to {new_name}")
+        success_panel(f"Name updated from {old_name.title()} to {new_name.title()}")
         space()
         wait_for_enter()
         status("Returning to dashboard", 0.5)
 
 
-def update_user_password(user, users):
+def update_user_pass(user_info):
     clear_screen()
     header("Update password",)
     space()
     while True:
-        current = get_input("Enter current password")
+        user_email = get_input("Enter Email ('q' to quit) ")
+        if user_email == 'q':
+            return None
         space()
 
-        if current == user['password']:  
-            password = get_input("Create a password")
+        if user_email == user_info['email']:  
+            password = get_input("Create a password ")
             space()
-            is_valid, message = validate_password(password, current)
+            is_valid, message = validate_password(password, user_email)
             console.print(message)
 
             if is_valid:
                 space()
-                confirm = get_input("Confirm password")
+                new_password = get_input("Confirm password")
             
-                if password == confirm:
-                    user['password'] = password
-                    save_users(users)
+                if password == new_password:
+                    hashed_new_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+                    update_user_password(hashed_new_password, user_email)
                     space()
                     success_panel("Password is Updated")
                     break
@@ -103,7 +108,7 @@ def update_user_password(user, users):
 
 
 
-def delete_user_profile(user, users):
+def delete_user_profile(user_info):
     clear_screen()
     header("DELETE ACCOUNT")
     space()
@@ -111,26 +116,27 @@ def delete_user_profile(user, users):
     "By performing this action, you are permenently\n"
     "deleting your account. This action CANNOT be undone.\n\n"
     f"Account to be deleted:\n"
-    f"- Name: {user['name']}\n"
-    f"- Username: {user['username']}\n"
-    f"- Email: {user['email']}\n",
+    f"- Name: {user_info['name']}\n"
+    f"- Username: {user_info['username']}\n"
+    f"- Email: {user_info['email']}\n",
     title="WARNING"
     )
     space()
 
-    password = get_input("Enter password to verify", password=True)
+    entered_password = get_input("Enter password to verify", password=True)
 
-    if password != user['password']:
+    if  not bcrypt.checkpw(entered_password.encode('utf-8'), user_info['password'].encode('utf-8')):
         space()
         error_panel("Incorrect password!\nDeletion cancelled for security.")
         sleep(2)
         return
+    
+    if bcrypt.checkpw(entered_password.encode('utf-8'), user_info['password'].encode('utf-8')):
+        space()
+        error_panel("Enter 'DELETE' to confirm the account deletation")
+        space()
 
-    space()
-    error_panel("Enter 'DELETE' to confirm the account deletation")
-    space()
-
-    confirm = get_input("Confirmation")
+        confirm = get_input("Confirmation")
 
     if not confirm:
         space()
@@ -143,32 +149,18 @@ def delete_user_profile(user, users):
         sleep(1.5)
         return
     
-    username = user['username']
-    user_id_to_delete = None
+    username = user_info['username']
 
-    for uid, user_data in users.items():
-        if user_data['username'] == username:
-            user_id_to_delete = uid
-            break
-    
-    if user_id_to_delete:
-        del users[user_id_to_delete]
+    delete_user(username)
 
-        save_users(users)
-        space()
-
-        success_panel(
-            "Account Deleted Successfully!\n\n"
-            f"User '{username} has been permanently removed.\n'"
-            "Thank you for using our system."
+    success_panel(
+        "Account Deleted Successfully!\n\n"
+        f"User '{username} has been permanently removed.\n'"
+        "Thank you for using our system."
         )
-        space()
+    space()
 
-        end_session()
+    end_session()
 
-        status("Returning to main menu...", 2)
-    else:
-        space()
-        error_panel("Error: User not found in database!")
-        sleep(2)
+    status("Returning to main menu...", 2)
 
