@@ -1,7 +1,8 @@
 from .ui import *
 import bcrypt
+from database.select import is_username_exists, is_correct_pass
 
-def login(users):
+def login():
     clear_screen()
     header("Welcome to LOGIN page")
     space()
@@ -15,27 +16,35 @@ def login(users):
             return None
 
         user = None
-        for u in users.values():
-            if u["Username"].lower() == username or u["Email"] == username:
-                user = u
-                break
-        if not user:
+        # for u in users.values():
+        #     if u["Username"].lower() == username or u["Email"] == username:
+        #         user = u
+        #         break
+        if is_username_exists(username):
+            user = username
+
+
+        if not is_username_exists(username):
             space()
             error_panel("User not Found")
-            wait_for_enter()
-            return None
+            continue
+            # return None
 
         #Password input
         attempts = 3
         while attempts > 0:
             space()
             warn_panel(f"{attempts} attempts left")
-            entered_Password = get_input("Password", password=True)
+            entered_password = get_input("Password", password=True)
 
-            if bcrypt.checkpw(entered_Password.encode('utf-8'), user["Password"].encode('utf-8')):
+            # hashed_password = bcrypt.hashpw(entered_password.encode('utf-8'), bcrypt.gensalt())
+            #Password should be assigned to the var.
+            user_pass = is_correct_pass(user)
 
+            if bcrypt.checkpw(entered_password.encode('utf-8'), user_pass['password'].encode('utf-8')):
+            # if hashed_password == 
                 space(2)
-                success_panel(f"Welcome back, {user['Name']}!")
+                success_panel(f"Welcome back, {user}!")
                 space()
                 status("Starting session...", 1)
                 return user
