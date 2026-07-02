@@ -20,13 +20,16 @@ A modular terminal-based authentication system built from scratch in Python with
 - ✅ Secure login with username OR email
 - ✅ Session management (login/logout)
 - ✅ Password strength requirements (8+ chars, numbers, special characters)
+- ✅ Password hashing with bcrypt
 - ✅ Login attempt limiting (3 attempts maximum)
 - ✅ Input sanitization and validation
+- ⚠️ Hybrid storage state: MySQL-backed auth is active while `auth/storage.py` remains as a temporary JSON support layer
 
 ### 👤 **User Management**
 - ✅ View profile information
 - ✅ Update display name
 - ✅ Change password with validation
+- ✅ Delete account with password confirmation
 - ✅ Secure logout with session cleanup
 
 ### 🎨 **Terminal UI**
@@ -41,21 +44,29 @@ A modular terminal-based authentication system built from scratch in Python with
 ```
 Authentication-System/
 │
-├── auth/                      # Core authentication module
-│   ├── __init__.py           # Package initialization
-│   ├── dashboard.py          # User dashboard & profile management
-│   ├── login.py              # Login logic & authentication
-│   ├── register.py           # User registration flow
-│   ├── sessions.py           # Session state management
-│   ├── storage.py            # JSON data persistence
-│   ├── theme.py              # Color themes (15 options)
-│   ├── ui.py                 # 25+ reusable UI components
-│   └── validators.py         # Input validation functions
+├── auth/                      # Core authentication and UI module
+│   ├── admin_dash.py          # Admin dashboard & account management
+│   ├── dashboard.py           # User dashboard & profile management
+│   ├── login.py               # Login logic & authentication
+│   ├── register.py            # User registration flow
+│   ├── sessions.py            # Session state management
+│   ├── storage.py             # Local JSON persistence helper
+│   ├── theme.py               # Color themes and styling
+│   ├── ui.py                  # Terminal UI components
+│   └── validators.py          # Input validation functions
 │
-├── user_data.json            # User database (auto-generated)
+├── database/                 # MySQL backend helpers
+│   ├── config.py             # MySQL connection settings
+│   ├── connect.py            # Database/table initialization script
+│   ├── get_db.py             # Database connection helper
+│   ├── insert.py             # Insert user records
+│   ├── select.py             # Query and authentication helpers
+│   ├── update.py             # Update profile and password
+│   └── delete.py             # Delete user records
 ├── main.py                   # Application entry point
 ├── requirements.txt          # Python dependencies
-└── README.md                 # This file
+├── README.md                 # This file
+└── asset/                    # Demo media and screenshots
 ```
 
 ### 🎯 **Architecture Principles**
@@ -69,6 +80,7 @@ Authentication-System/
 ### Prerequisites
 - Python 3.6 or higher
 - pip (Python package manager)
+- MySQL server running locally or remotely
 
 ### Setup
 
@@ -83,10 +95,19 @@ cd Authentication-System
 pip install -r requirements.txt
 ```
 
-3. **Run the application**
+3. **Configure MySQL**
+- Edit `database/config.py` with your MySQL connection settings.
+- Initialize the users table if needed:
+```bash
+python database/connect.py
+```
+
+4. **Run the application**
 ```bash
 python main.py
 ```
+
+> Note: The application is currently in a hybrid persistence state: MySQL-backed authentication is active, and `auth/storage.py` remains as a transitional JSON helper for bootstrap and compatibility.
 
 ## 📖 User Guide
 
@@ -137,7 +158,7 @@ After successful login:
 - Enter new password (must meet requirements)
 - Confirm new password
 
-**[4] Delete Account** - Coming in Phase 4
+**[4] Delete Account** - Permanently delete your account with password confirmation
 
 **[5] Logout** - End your session safely
 
@@ -215,26 +236,34 @@ These features are planned for future phases (see Roadmap).
 | Component | Technology | Purpose |
 |-----------|-----------|---------|
 | **Language** | Python 3.6+ | Core application logic |
-| **Terminal UI** | [Rich](https://github.com/Textualize/rich) | Beautiful terminal formatting |
-| **Data Storage** | JSON | User data persistence |
-| **Password Security** | Bcrypt| Password hashing |
-| **Architecture** | Modular | Clean separation of concerns |
+| **Terminal UI** | [Rich](https://github.com/Textualize/rich) | Terminal formatting and layouts |
+| **Password Security** | bcrypt | Password hashing |
+| **Database** | MySQL + PyMySQL | Persistent user storage |
+| **Local helper** | JSON | Transitional fallback storage during MySQL migration |
 
 **Dependencies:**
 ```
 bcrypt==5.0.0
+cffi==2.0.0
+cryptography==49.0.0
+markdown-it-py==4.0.0
+mdurl==0.1.2
+pycparser==3.0
+Pygments==2.19.2
+PyMySQL==1.2.0
 rich==14.3.1
 ```
 
 ## 📊 Project Statistics
 
-- **Total Lines of Code:** 800+
-- **Python Files:** 10 modular files
+- **Python Files:** 16 modular files
+- **Total Lines of Code:** 1300+ Lines
 - **UI Components:** 25+
 - **Themes Available:** 15
-- **Commits:** 110+
-- **Development Time:** 5 months (with major breaks in between)
-- **Current Phase:** 5 (Complete)
+- **Database helpers:** 7 files
+- **Current Phase:** 5/6 (MySQL migration active)
+
+> The project is actively transitioning from local JSON storage to a hybrid MySQL-backed authentication system.
 
 ## 🗺️ Development Roadmap
 
@@ -272,10 +301,11 @@ rich==14.3.1
 - [ ] Account lockout after failed attempts (will be done after phase 6 to reduce complexity)
 - [ ] Password history (prevent reuse) (will be done after phase 6 to reduce complexity)
 
-### 📋 Phase 6: Database Integration (starting soon)
-- [ ] MySQL database setup
-- [ ] Database schema design
-- [ ] Migration from JSON to MySQL
+### � Phase 6: Database Integration (In progress)
+- ✅ MySQL database setup
+- ✅ Database schema design
+- ✅ Partial migration from JSON to MySQL
+- [ ] Complete migration and remove transitional JSON helper
 
 ## 🐛 Known Issues
 
@@ -330,4 +360,4 @@ This is a personal learning project, but feedback and suggestions are welcome!
 
 Built with 💙 by [Aryan Gupta](https://github.com/aryancodes12) | Learning by Building 🚀
 
-*Last Updated: 4 June 2026 | Phase 5 Complete* 
+*Last Updated: 2 July 2026 | Phase 6 in progress* 
