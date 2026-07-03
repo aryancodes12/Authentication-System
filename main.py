@@ -11,6 +11,8 @@ fake_loading, space, get_choice, get_input, wait_for_enter, animated_logo)
 from auth.dashboard import *
 from auth.sessions import *
 
+from database.connect import create_database, create_users_table
+
 #startup
 clear_screen()
 animated_logo()
@@ -18,11 +20,16 @@ space()
 status("Initializing Authentication System ...", 1.5)
 users = load_users()
 
+create_database()
+create_users_table()
+status("Initializing Database ...", 0.8)
+
+
+
 #Checking if JSON is empty if it is then adding admin entry
 if not users:
     admin_data(users)
-    
-    
+
 
 #determing the userid
 if users:
