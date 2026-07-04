@@ -10,7 +10,46 @@ A modular terminal-based authentication system built from scratch in Python with
 ## 🎥 Demo
 ▶️ [Watch full demo](./asset/demo.mp4)
 <br><br>
-📷 Hashed password demo ![Hashed password demo](./asset/hashed_pw.png)
+
+## 📸 Screenshots
+
+> **Note:** Admin Dashboard screenshots will be added after the MySQL migration is complete.
+
+### 🚀 Startup
+<img src="./asset/starting.png" width="800">
+
+### 🏠 Main Menu
+<img src="./asset/main_menu.png" width="800">
+
+### 📝 User Registration
+<img src="./asset/registration_page.png" width="800">
+
+### 🔑 User Login
+<img src="./asset/login_page.png" width="800">
+
+### 👤 User Dashboard
+<img src="./asset/user_dashboard.png" width="800">
+
+### 📄 View Profile
+<img src="./asset/account_info.png" width="800">
+
+### ✏️ Update Name
+<img src="./asset/update_name.png" width="800">
+
+### 🔒 Change Password
+<img src="./asset/update_pass.png" width="800">
+
+### 🗑️ Delete Account
+<img src="./asset/delete_account.png" width="800">
+
+### 👋 Exit
+<img src="./asset/exit.png" width="800">
+
+## 🗄️ Database Schema
+
+The application uses a MySQL database to store user information securely.
+
+<img src="./asset/database_schema.png" width="800">
 
 
 ## ✨ Features
