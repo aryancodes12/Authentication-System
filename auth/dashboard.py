@@ -3,7 +3,6 @@ from .ui import *
 from .theme import *
 from .sessions import *
 from .validators import validate_password
-from .storage import save_users
 from database.select import select_one_user_info
 from database.update import update_user_name, update_user_password
 from database.delete import delete_user
