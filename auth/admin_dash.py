@@ -1,10 +1,9 @@
 from .ui import *
 from .sessions import end_session
-from .storage import save_users
 import bcrypt
-from database.select import select_all_users
+from database.select import select_all_users, is_username_exists, is_correct_pass
 
-def admin_dash(users):
+def admin_dash():
     clear_screen()
     header("Admin Privileges")
     space(2)
@@ -34,42 +33,42 @@ def admin_dash(users):
 
     elif choice == "2":
         clear_screen()
-        delete_user(users)
+        delete_user()
     elif choice == "3":
         clear_screen()
         header("Search and Filter users")
 
-        query = get_input("Search user by Name/Email/Username/UID ").strip()
+        # query = get_input("Search user by Name/Email/Username/UID ").strip()
 
-        results = search(users, query)
+        # results = search(users, query)
         
         
         
-        if results:
-            success_panel(f"Result found {len(results)} user(s)\n")
+        # if results:
+        #     success_panel(f"Result found {len(results)} user(s)\n")
 
-            table = Table(style=HEADER)
+        #     table = Table(style=HEADER)
 
-            table.add_column("User Id", style = SUCCESS)
-            table.add_column("Name", style = ACCENT)
-            table.add_column("Email", style = WARNING)
-            table.add_column("Username", style = PRIMARY)
+        #     table.add_column("User Id", style = SUCCESS)
+        #     table.add_column("Name", style = ACCENT)
+        #     table.add_column("Email", style = WARNING)
+        #     table.add_column("Username", style = PRIMARY)
 
-            for uid, info in results:
-                table.add_row(
-                uid,
-                info["Name"],
-                info["Email"],
-                info["Username"]
-                )
-            console.print(table)
-            wait_for_enter()
-            status("Returing to the menu... ", 0.5)
-        else:
-            print()
-            warn_panel("User not found")
-            sleep(4)
-            status("Returing to the menu... ", 0.5)
+        #     for uid, info in results:
+        #         table.add_row(
+        #         uid,
+        #         info["Name"],
+        #         info["Email"],
+        #         info["Username"]
+        #         )
+        #     console.print(table)
+        #     wait_for_enter()
+        #     status("Returing to the menu... ", 0.5)
+        # else:
+        #     print()
+        #     warn_panel("User not found")
+        #     sleep(4)
+        #     status("Returing to the menu... ", 0.5)
 
 
     elif choice == "4":
@@ -83,7 +82,7 @@ def admin_dash(users):
 
 
 
-def admin_login(users):
+def admin_login():
     clear_screen()
     header("ADMIN LOGIN page")
     space()
@@ -96,17 +95,15 @@ def admin_login(users):
         if username == "q":
             return None
 
-        user = None
-        for u in users.values():
-            if u["Username"].lower() == username or u["Email"] == username:
-                user = u
-                break
-        if not user:
+        admin = None
+
+        if is_username_exists(username):
+            admin = username
+
+        if not is_username_exists(username):
             space()
-            error_panel("User not Found")
-            space(2)
-            wait_for_enter()
-            return None
+            error_panel("Wrong Credentials")
+            continue
 
         #Password input
         attempts = 3
@@ -115,12 +112,13 @@ def admin_login(users):
             warn_panel(f"{attempts} attempts left")
             entered_password = get_input("Password", password=True)
 
-            if bcrypt.checkpw(entered_password.encode('utf-8'), u["Password"].encode('utf-8')):
+            admin_pass = is_correct_pass(admin)
+            if bcrypt.checkpw(entered_password.encode('utf-8'), admin_pass['password'].encode('utf-8')):
                 space(2)
-                success_panel(f"Welcome back, {user['Name']}!")
+                success_panel(f"Welcome back, {admin}!")
                 space()
                 status("Starting session...", 1)
-                return user
+                return admin
             else:
                 attempts -= 1
                 if attempts > 0:
@@ -173,7 +171,7 @@ def delete_user(users):
         
         if confirm == keyword:
             del users[found]
-            save_users(users)
+            # save_users(users)
             success_panel("User DESTROYED successfully.")
             
             status("Returing to menu...", 1)
