@@ -1,13 +1,12 @@
-from .validators import is_valid_email, is_unique_username, validate_password
+from .validators import validate_password
 from .ui import *
-from .storage import save_users
 from database.insert import insert_user
 from database.select import is_username_exists, is_email_exists
 
 import time
 import bcrypt
 
-def register_user(users, counter):
+def register_user():
     clear_screen()
     header("Welcome to the Registration Page")
     space(2)
