@@ -1,5 +1,7 @@
 import pymysql
 from .get_db import get_db, get_db_database_connection
+from .select import is_database_empty
+from .insert import admin_data
 
 def create_database():
     try:
@@ -32,6 +34,9 @@ def create_users_table():
         )"""
     
         cursor.execute(query)
+
+        if is_database_empty():
+            admin_data()
 
     except pymysql.MySQLError as e:
         print(f"\nError: {e}\n")
