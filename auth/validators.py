@@ -1,9 +1,3 @@
-def is_valid_email(email):
-    return "@gmail.com" in email
-
-def is_unique_username(username, users):
-    return username not in [u["Username"] for u in users.values()]
-
 def validate_password(password, username):
     if not password:
         return False, "Password cannot be empty"
