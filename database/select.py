@@ -1,6 +1,28 @@
 import pymysql
 from .get_db import get_db
 
+#Checking if the database is empty to insert admin credentials
+def is_database_empty():
+    try:
+        conn = cursor = None
+        conn = get_db()
+        cursor = conn.cursor()
+
+        query = """SELECT username FROM users WHERE username = 'admin'"""
+
+        cursor.execute(query)
+        count = cursor.fetchone()
+        if count is None:
+            return True
+        return False
+
+    except pymysql.MySQLError as e:
+        print(f"\nError: {e}\n")
+    finally:
+        if cursor: cursor.close()
+        if conn: conn.close()
+
+
 #Fetching all users
 def select_all_users():
     try:
