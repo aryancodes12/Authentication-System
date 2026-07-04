@@ -16,10 +16,7 @@ def login():
             return None
 
         user = None
-        # for u in users.values():
-        #     if u["Username"].lower() == username or u["Email"] == username:
-        #         user = u
-        #         break
+        
         if is_username_exists(username):
             user = username
 
