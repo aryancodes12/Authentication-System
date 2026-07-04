@@ -3,9 +3,8 @@ from auth.register import register_user
 from auth.login import login
 from auth.admin_dash import admin_dash, admin_login
 
-from auth.ui import (clear_screen, sleep, header, info_panel, menu_panel, 
-success, success_panel, warn, warn_panel, error, error_panel, status, 
-fake_loading, space, get_choice, get_input, wait_for_enter, animated_logo)
+from auth.ui import (clear_screen, sleep, header, menu_panel, 
+success_panel, warn, status, space, get_choice, animated_logo)
 
 from auth.dashboard import *
 from auth.sessions import *
