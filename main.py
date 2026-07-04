@@ -1,5 +1,4 @@
 import os
-from auth.storage import load_users, save_users, admin_data
 from auth.register import register_user
 from auth.login import login
 from auth.admin_dash import admin_dash, admin_login
@@ -18,7 +17,7 @@ clear_screen()
 animated_logo()
 space()
 status("Initializing Authentication System ...", 1.5)
-users = load_users()
+# users = load_users()
 
 create_database()
 create_users_table()
@@ -27,15 +26,15 @@ status("Initializing Database ...", 0.8)
 
 
 #Checking if JSON is empty if it is then adding admin entry
-if not users:
-    admin_data(users)
+# if not users:
+#     admin_data(users)
 
 
-#determing the userid
-if users:
-    counter = max(int(u[1:]) for u in users.keys()) + 1
-else: 
-    counter = 1
+# #determing the userid
+# if users:
+#     counter = max(int(u[1:]) for u in users.keys()) + 1
+# else: 
+#     counter = 1
 
 #main loop
 while True:
@@ -60,20 +59,18 @@ while True:
                 user_dashboard(current)
         
     elif choice == "2":
-        register_user(users, counter)
+        register_user()
     elif choice == "3":
-        admin = admin_login(users)
+        admin = admin_login()
         clear_screen()
         if admin:
             start_session(admin)
             while is_logged_in():
-                admin_dash(users)
+                admin_dash()
     elif choice == "4":
-        space(2)
-        fake_loading("Saving data ")
-        save_users(users)
-
-        space()
+        # space(2)
+        # fake_loading("Saving data ")
+        # save_users(users)
 
         space()
         success_panel("👋 Thanks for using the System!")
