@@ -1,7 +1,8 @@
-from .ui import *
+from .ui import clear_screen, header, space, get_input, warn_panel, error_panel, success_panel, status
 import bcrypt
 from database.select import is_username_exists, is_correct_pass
 
+#Main login function
 def login():
     clear_screen()
     header("Welcome to LOGIN page")
@@ -11,7 +12,6 @@ def login():
     while True:
         username = get_input("Enter Username or Email ('q' to quit)")
 
-
         if username == "q":
             return None
 
@@ -19,7 +19,6 @@ def login():
         
         if is_username_exists(username):
             user = username
-
 
         if not is_username_exists(username):
             space()
@@ -34,12 +33,9 @@ def login():
             warn_panel(f"{attempts} attempts left")
             entered_password = get_input("Password", password=True)
 
-            # hashed_password = bcrypt.hashpw(entered_password.encode('utf-8'), bcrypt.gensalt())
-            #Password should be assigned to the var.
             user_pass = is_correct_pass(user)
 
             if bcrypt.checkpw(entered_password.encode('utf-8'), user_pass['password'].encode('utf-8')):
-            # if hashed_password == 
                 space(2)
                 success_panel(f"Welcome back, {user}!")
                 space()
