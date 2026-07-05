@@ -63,7 +63,7 @@ def update_user_profile_name(user_info):
     header("Update Name")
     old_name = user_info["name"]
     space()
-    info(f"Current Name: {old_name}")
+    result(f"Current Name: {old_name}")
 
     new_name = get_input("Enter new name to update").strip()
     space()
