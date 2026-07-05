@@ -1,13 +1,13 @@
-import os
 from auth.register import register_user
 from auth.login import login
-from auth.admin_dash import admin_dash, admin_login
+from auth.admin_dash import admin_dash
+from auth.admin import admin_login
 
-from auth.ui import (clear_screen, sleep, header, menu_panel, 
+from auth.ui import (clear_screen, header, menu_panel, 
 success_panel, warn, status, space, get_choice, animated_logo)
 
-from auth.dashboard import *
-from auth.sessions import *
+from auth.dashboard import user_dashboard
+from auth.sessions import start_session, is_logged_in, get_current_user
 
 from database.connect import create_database, create_users_table
 
@@ -16,24 +16,11 @@ clear_screen()
 animated_logo()
 space()
 status("Initializing Authentication System ...", 1.5)
-# users = load_users()
 
+#Creating database and users table if not exists
 create_database()
 create_users_table()
-status("Initializing Database ...", 0.8)
 
-
-
-#Checking if JSON is empty if it is then adding admin entry
-# if not users:
-#     admin_data(users)
-
-
-# #determing the userid
-# if users:
-#     counter = max(int(u[1:]) for u in users.keys()) + 1
-# else: 
-#     counter = 1
 
 #main loop
 while True:
@@ -59,6 +46,7 @@ while True:
         
     elif choice == "2":
         register_user()
+
     elif choice == "3":
         admin = admin_login()
         clear_screen()
@@ -67,15 +55,12 @@ while True:
             while is_logged_in():
                 admin_dash()
     elif choice == "4":
-        # space(2)
-        # fake_loading("Saving data ")
-        # save_users(users)
 
         space()
         success_panel("👋 Thanks for using the System!")
         break
+
     else:
         space()
         warn("❌ Invalid Choice")
-
-
+        continue
