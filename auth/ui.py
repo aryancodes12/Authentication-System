@@ -60,7 +60,7 @@ def error(msg):
 
 
 
-def info(msg):
+def result(msg):
     console.print(msg, style=INFO)
 
 def success_panel(msg, title="SUCCESS"):
