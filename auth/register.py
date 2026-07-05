@@ -1,5 +1,5 @@
 from .validators import validate_password
-from .ui import *
+from .ui import clear_screen, header, space, get_input, warn, error, success_panel, sleep, console
 from database.insert import insert_user
 from database.select import is_username_exists, is_email_exists
 
@@ -58,23 +58,12 @@ def register_user():
             else:
                 error("❌ Passwords don't match!")
 
-#Storing in Dict
-    # user_id = f"u{counter:03d}"
-    # users[user_id] = {
-    #     "Name" : full_name,
-    #     "Email" : email,
-    #     "Username" : username,
-    #     "Password" : hashed_password.decode('utf-8'), # Store hashed password as string,
-    # }
-
 # Storing in Database
     insert_values = [full_name, username, email, hashed_password.decode('utf-8')]
     insert_user(*insert_values)
 
 
     #Success message
+    clear_screen()
     success_panel("Registration Successful!")
     sleep(1.6)
-    
-    # save_users(users)
-    # return users, counter + 1
