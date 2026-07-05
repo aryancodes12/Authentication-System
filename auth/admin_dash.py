@@ -2,6 +2,7 @@ from .ui import *
 from .sessions import end_session
 import bcrypt
 from database.select import select_all_users, is_username_exists, is_correct_pass
+from database.delete import delete_user
 
 def admin_dash():
     clear_screen()
@@ -25,15 +26,13 @@ def admin_dash():
         sleep(1)
         space(2)
     elif choice == '1':
-        # clear_screen()
-        # show_users(users)
-        data = select_all_users()
-        console.print(display_user_table(data, title="Registered Users"))
-        sleep(6)
+        clear_screen()
+        show_users()
+
 
     elif choice == "2":
         clear_screen()
-        delete_user()
+        delete_user_with_username()
     elif choice == "3":
         clear_screen()
         header("Search and Filter users")
@@ -130,34 +129,30 @@ def admin_login():
                     status("Returning to main menu...", 1)
                     return None
 
-# def show_users(users):
-#     clear_screen()
-#     status("Loading information...", 0.4)
-#     header("REGISTERED USERS")
-#     profile = display_user_table(users)
-#     console.print(profile)
-#     space()
-#     wait_for_enter("Press 'Enter' to go back")
+def show_users():
+    clear_screen()
+    status("Loading information...", 0.4)
+    header("REGISTERED USERS")
+    data = select_all_users()
+    console.print(display_user_table(data, title="Registered Users"))
+    space()
+    wait_for_enter("Press 'Enter' to go back")
 
 
 #DELETE USERS
-def delete_user(users):
+def delete_user_with_username():
     header("REGISTERED USERS")
 
-    uid = get_input("Enter user's UID to delete or 'q' to quit")
+    username = get_input("Enter user's username to delete or 'q' to quit")
 
     found = None
-    if uid == 'q':
+    if username == 'q':
         return None
-    elif uid != 'q':
-        for id in users.keys():
-            if uid == id:
-                success_panel("UID Found in database")
-                found = id
-                break
+    
+    found = is_username_exists(username)
 
     if not found:
-        error_panel("UID not found in the database")
+        error_panel("Username not found in the database")
         status("Returning to menu ...", 1)
         return None
 
@@ -170,8 +165,7 @@ def delete_user(users):
             return None
         
         if confirm == keyword:
-            del users[found]
-            # save_users(users)
+            delete_user(found['username'])
             success_panel("User DESTROYED successfully.")
             
             status("Returing to menu...", 1)
