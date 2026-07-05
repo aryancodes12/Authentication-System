@@ -134,8 +134,8 @@ def display_user_table(users, title = ""):
 
     table.add_column("User Id", style = SUCCESS)
     table.add_column("Name", style = ACCENT)
-    table.add_column("Email", style = WARNING)
-    table.add_column("Username", style = PRIMARY)
+    table.add_column("Username", style = WARNING)
+    table.add_column("Email", style = PRIMARY)
     table.add_column("Created At", style = MUTED)
 
 
