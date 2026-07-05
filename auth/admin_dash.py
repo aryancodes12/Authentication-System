@@ -116,7 +116,7 @@ def search():
                     result["username"],
                     result["email"]
                     )
-                console.print(table)
+            console.print(table)
             choice = get_input("Search again? (y/n)").lower()
             if choice == 'y':
                 continue

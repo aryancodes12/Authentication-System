@@ -2,37 +2,20 @@
 
 A modular terminal-based authentication system built from scratch in Python with a cyberpunk-themed UI. Designed as a hands-on learning project, it explores real-world authentication, security fundamentals, clean architecture, and backend development concepts.
 
-## 📝 In Simple Words
-
-**What is this project?**
-
-Imagine the login screen you see on websites and apps - where you enter your username and password. This project is like building that from the ground up! 
-
-It's a **sign-up and login system** that:
-- 🔓 Lets you create an account (sign up)
-- 🔐 Lets you log in with your username and password
-- 👤 Shows your account information
-- ✏️ Lets you update your name and password
-- 🗑️ Lets you delete your account if you want
-- 👨‍💼 Has an admin section to manage all users
-
-All of this is displayed in a colorful, glowing terminal interface (inspired by cyberpunk movies). Behind the scenes, it safely stores all your information in a database.
-
-**Who built it?** A student learning how authentication (login systems) actually work behind the scenes.
 
 > 💡 **Note:** This project is actively being improved! Soon, features like email validation using regex (accepting any valid email, not just @gmail.com), better error handling, and enhanced security will be added.
 
 ![Python Version](https://img.shields.io/badge/python-3.6%2B-blue)
 ![Status](https://img.shields.io/badge/status-complete-success)
 ![Phase](https://img.shields.io/badge/phase-6%20complete-brightgreen)
+![Version](https://img.shields.io/badge/version-v1.0-blue)
+![Database](https://img.shields.io/badge/database-MySQL-orange)
 
 ## 🎥 Demo
 ▶️ [Watch full demo](./asset/demo.mp4)
 <br><br>
 
 ## 📸 Screenshots
-
-> **Note:** Admin Dashboard screenshots coming soon.
 
 ### 🚀 Startup
 <img src="./asset/starting.png" width="800">
@@ -63,6 +46,23 @@ All of this is displayed in a colorful, glowing terminal interface (inspired by 
 
 ### 👋 Exit
 <img src="./asset/exit.png" width="800">
+
+### 👨‍💼 Admin Features
+
+#### 🔐 Admin Login
+<img src="./asset/admin_login.png" width="800">
+
+#### 📊 Admin Dashboard
+<img src="./asset/admin_panel.png" width="800">
+
+#### 👥 View All Registered Users
+<img src="./asset/registered_users.png" width="800">
+
+#### 🔍 Search Users
+<img src="./asset/search_users.png" width="800">
+
+#### 🗑️ Delete User Accounts
+<img src="./asset/delete_users.png" width="800">
 
 ## 🗄️ Database Schema
 
@@ -107,8 +107,7 @@ Authentication-System/
 │   ├── dashboard.py           # User dashboard & profile management
 │   ├── login.py               # Login logic & authentication
 │   ├── register.py            # User registration flow
-│   ├── sessions.py            # Session state management
-│   ├── storage.py             # Local JSON persistence helper
+│   ├── sessions.py            # Session state managementS
 │   ├── theme.py               # Color themes and styling
 │   ├── ui.py                  # Terminal UI components
 │   └── validators.py          # Input validation functions
@@ -272,6 +271,8 @@ Sunset, Ocean, Forest, Hacker Terminal, Dark Purple, Fire, Rainbow, Electric, Mo
 
 ### Current Security Features
 ✅ Password validation
+✅ Password hashing with bcrypt
+✅ Password validation
 ✅ Login attempt limiting (3 tries)  
 ✅ Session state management  
 ✅ Input sanitization  
@@ -296,7 +297,8 @@ These features are planned for future phases (see Roadmap).
 | **Language** | Python 3.6+ | Core application logic |
 | **Terminal UI** | [Rich](https://github.com/Textualize/rich) | Terminal formatting and layouts |
 | **Password Security** | bcrypt | Password hashing |
-| **Database** | MySQL + PyMySQL | Persistent user storage and authentication |
+| **Database** | MySQL | Persistent user storage and authentication |
+| **Database Driver** | PyMySQL | Connecting Database and Python |
 | **Local helper** | JSON (storage.py) | Legacy backup storage (to be removed) |
 
 **Dependencies:**
@@ -313,10 +315,10 @@ rich==14.3.1
 ```
 
 ## 📊 Project Statistics
-
-- **Total Lines of Code:** 1,312
+- **Python Modules:** 17
+- **Lines of Code:** 1300+
 - **Database helpers:** 7 files
-- **Current Phase:** 6 (✅ Complete)
+- **Development Phases:** 6
 
 > MySQL migration is complete. All user data is now persisted in MySQL database.
 
@@ -379,6 +381,9 @@ Building this project taught me:
 - ✅ Security considerations in auth systems
 - ✅ Error handling and user feedback
 - ✅ Code reusability through components
+- ✅ SQL integration using PyMySQL
+- ✅ Database abstraction
+- ✅ Git branching and merging
 
 ## 🤝 Contributing
 

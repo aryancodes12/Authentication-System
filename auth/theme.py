@@ -284,33 +284,33 @@
 # ═══════════════════════════════════════════════════════════════
 
 # # === MAIN COLORS ===
-# PRIMARY = "bright_yellow"         # Lightning
-# SECONDARY = "bright_cyan"         # Electric blue
-# ACCENT = "bright_magenta"         # Plasma pink
+PRIMARY = "bright_yellow"         # Lightning
+SECONDARY = "bright_cyan"         # Electric blue
+ACCENT = "bright_magenta"         # Plasma pink
 
-# # === STATUS COLORS ===
-# SUCCESS = "bright_green"
-# ERROR = "bright_red"
-# WARNING = "bright_yellow"
-# INFO = "bright_cyan"
+# === STATUS COLORS ===
+SUCCESS = "bright_green"
+ERROR = "bright_red"
+WARNING = "bright_yellow"
+INFO = "bright_cyan"
 
-# # === TEXT STYLES ===
-# HEADER = "bold bright_yellow"
-# SUBHEADER = "bright_cyan"
-# MUTED = "dim yellow"
-# HIGHLIGHT = "bold bright_magenta"
+# === TEXT STYLES ===
+HEADER = "bold bright_yellow"
+SUBHEADER = "bright_cyan"
+MUTED = "dim yellow"
+HIGHLIGHT = "bold bright_magenta"
 
-# # === BORDERS ===
-# BORDER_PRIMARY = "bright_yellow"
-# BORDER_ACCENT = "bright_cyan"
-# BORDER_SUCCESS = "bright_green"
-# BORDER_WARNING = "bright_yellow"
-# BORDER_ERROR = "bright_red"
+# === BORDERS ===
+BORDER_PRIMARY = "bright_yellow"
+BORDER_ACCENT = "bright_cyan"
+BORDER_SUCCESS = "bright_green"
+BORDER_WARNING = "bright_yellow"
+BORDER_ERROR = "bright_red"
 
-# # === SPECIAL ===
-# GLOW = "bold bright_yellow"
-# PANEL = "bright_yellow"
-# RULE = "bright_cyan"
+# === SPECIAL ===
+GLOW = "bold bright_yellow"
+PANEL = "bright_yellow"
+RULE = "bright_cyan"
 
 
 # ═══════════════════════════════════════════════════════════════
@@ -390,33 +390,33 @@
 # ─────────────────────────────────────────────────────────────
 
 # # === MAIN COLORS ===
-PRIMARY = "cyan"
-SECONDARY = "blue"
-ACCENT = "bright_cyan"
+# PRIMARY = "cyan"
+# SECONDARY = "blue"
+# ACCENT = "bright_cyan"
 
-# === STATUS COLORS ===
-SUCCESS = "green"
-ERROR = "red"
-WARNING = "yellow"
-INFO = "cyan"
+# # === STATUS COLORS ===
+# SUCCESS = "green"
+# ERROR = "red"
+# WARNING = "yellow"
+# INFO = "cyan"
 
-# === TEXT STYLES ===
-HEADER = "bold cyan"
-SUBHEADER = "blue"
-MUTED = "dim cyan"
-HIGHLIGHT = "bold bright_cyan"
+# # === TEXT STYLES ===
+# HEADER = "bold cyan"
+# SUBHEADER = "blue"
+# MUTED = "dim cyan"
+# HIGHLIGHT = "bold bright_cyan"
 
-# === BORDERS ===
-BORDER_PRIMARY = "cyan"
-BORDER_ACCENT = "blue"
-BORDER_SUCCESS = "green"
-BORDER_WARNING = "yellow"
-BORDER_ERROR = "red"
+# # === BORDERS ===
+# BORDER_PRIMARY = "cyan"
+# BORDER_ACCENT = "blue"
+# BORDER_SUCCESS = "green"
+# BORDER_WARNING = "yellow"
+# BORDER_ERROR = "red"
 
-# === SPECIAL ===
-GLOW = "bold bright_cyan"
-PANEL = "cyan"
-RULE = "blue"
+# # === SPECIAL ===
+# GLOW = "bold bright_cyan"
+# PANEL = "cyan"
+# RULE = "blue"
 
 
 # ─────────────────────────────────────────────────────────────
