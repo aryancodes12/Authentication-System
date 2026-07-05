@@ -1,7 +1,7 @@
 from .ui import *
 from .sessions import end_session
 import bcrypt
-from database.select import select_all_users, is_username_exists, is_correct_pass
+from database.select import select_all_users, is_username_exists, is_correct_pass, select_users_by_name
 from database.delete import delete_user
 
 def admin_dash():
@@ -24,7 +24,7 @@ def admin_dash():
         space()
         warn("Invalid choice")
         sleep(1)
-        space(2)
+
     elif choice == '1':
         clear_screen()
         show_users()
@@ -35,40 +35,7 @@ def admin_dash():
         delete_user_with_username()
     elif choice == "3":
         clear_screen()
-        header("Search and Filter users")
-
-        # query = get_input("Search user by Name/Email/Username/UID ").strip()
-
-        # results = search(users, query)
-        
-        
-        
-        # if results:
-        #     success_panel(f"Result found {len(results)} user(s)\n")
-
-        #     table = Table(style=HEADER)
-
-        #     table.add_column("User Id", style = SUCCESS)
-        #     table.add_column("Name", style = ACCENT)
-        #     table.add_column("Email", style = WARNING)
-        #     table.add_column("Username", style = PRIMARY)
-
-        #     for uid, info in results:
-        #         table.add_row(
-        #         uid,
-        #         info["Name"],
-        #         info["Email"],
-        #         info["Username"]
-        #         )
-        #     console.print(table)
-        #     wait_for_enter()
-        #     status("Returing to the menu... ", 0.5)
-        # else:
-        #     print()
-        #     warn_panel("User not found")
-        #     sleep(4)
-        #     status("Returing to the menu... ", 0.5)
-
+        search()
 
     elif choice == "4":
         end_session()
@@ -134,7 +101,7 @@ def show_users():
     status("Loading information...", 0.4)
     header("REGISTERED USERS")
     data = select_all_users()
-    console.print(display_user_table(data, title="Registered Users"))
+    console.print(display_user_table(data))
     space()
     wait_for_enter("Press 'Enter' to go back")
 
@@ -174,15 +141,42 @@ def delete_user_with_username():
             status("Returing to menu...",1)
 
 
-def search(users, query):
-    result = []
-    query = query.lower().strip()
+def search():
+    while True:
+        clear_screen()
+        header("SEARCH USERS")
+        query = get_input("Search user by Name").strip()
 
-    for uid, data in users.items():
-        if (query in data['Name'].lower() or
-            query in data['Email'].lower() or
-            query in data["Username"].lower() or
-            query == uid.lower()):
-            result.append((uid, data))
+        results = select_users_by_name(query)
+        
+        if results:
+            success_panel(f"Names containing '{query}' found in the database")
 
-    return result
+            table = Table(style=HEADER)
+
+            table.add_column("User Id", style = SUCCESS)
+            table.add_column("Name", style = ACCENT)
+            table.add_column("Username", style = WARNING)
+            table.add_column("Email", style = PRIMARY)
+
+            for result in results:
+                table.add_row(
+                    str(result['id']),
+                    result["name"],
+                    result["username"],
+                    result["email"]
+                    )
+                console.print(table)
+            choice = get_input("Search again? (y/n)").lower()
+            if choice == 'y':
+                continue
+            elif choice == 'n':
+                break
+            else:
+                warn_panel("Invalid choice, returning to menu...")
+                status("Returing to the menu... ", 1)
+                    
+        else:
+            warn_panel("User not found")
+            sleep(4)
+            status("Returing to the menu... ", 0.5)
