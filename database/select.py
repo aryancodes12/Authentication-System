@@ -138,3 +138,28 @@ def is_correct_pass(username):
     finally:
         if cursor: cursor.close()
         if conn: conn.close()
+
+
+def select_users_by_name(name):
+    try:
+        conn = cursor = None
+        conn = get_db()
+        cursor = conn.cursor()
+
+        query = """SELECT * FROM users WHERE name LIKE %s"""
+
+        cursor.execute(query, (f"%{name}%",))
+
+        users = cursor.fetchall()
+
+        if not users:
+            pass
+        else:
+            return users
+        
+    except pymysql.MySQLError as e:
+        print(f"\nError: {e}\n")
+
+    finally:
+        if cursor: cursor.close()
+        if conn: conn.close()
