@@ -165,7 +165,7 @@ def delete_user_with_username():
             return None
         
         if confirm == keyword:
-            delete_user(found['username'])
+            delete_user(username)
             success_panel("User DESTROYED successfully.")
             
             status("Returing to menu...", 1)
