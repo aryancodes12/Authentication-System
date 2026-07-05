@@ -7,6 +7,7 @@ from database.select import select_one_user_info
 from database.update import update_user_name, update_user_password
 from database.delete import delete_user
 
+
 def user_dashboard(user):
     global username
     global user_info
@@ -162,4 +163,3 @@ def delete_user_profile(user_info):
     end_session()
 
     status("Returning to main menu...", 2)
-
