@@ -3,6 +3,7 @@ from .get_db import get_db, get_db_database_connection
 from .select import is_database_empty
 from .insert import admin_data
 
+
 def create_database():
     try:
         conn = get_db_database_connection()
@@ -17,6 +18,7 @@ def create_database():
             cursor.close()
         if conn:
             conn.close()
+
 
 def create_users_table():
     try:

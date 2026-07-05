@@ -4,8 +4,8 @@ A modular terminal-based authentication system built from scratch in Python with
 
 
 ![Python Version](https://img.shields.io/badge/python-3.6%2B-blue)
-![Status](https://img.shields.io/badge/status-active-success)
-![Phase](https://img.shields.io/badge/phase-5%20complete-orange)
+![Status](https://img.shields.io/badge/status-complete-success)
+![Phase](https://img.shields.io/badge/phase-6%20complete-brightgreen)
 
 ## 🎥 Demo
 ▶️ [Watch full demo](./asset/demo.mp4)
@@ -13,7 +13,7 @@ A modular terminal-based authentication system built from scratch in Python with
 
 ## 📸 Screenshots
 
-> **Note:** Admin Dashboard screenshots will be added after the MySQL migration is complete.
+> **Note:** Admin Dashboard screenshots coming soon.
 
 ### 🚀 Startup
 <img src="./asset/starting.png" width="800">
@@ -62,7 +62,7 @@ The application uses a MySQL database to store user information securely.
 - ✅ Password hashing with bcrypt
 - ✅ Login attempt limiting (3 attempts maximum)
 - ✅ Input sanitization and validation
-- ⚠️ Hybrid storage state: MySQL-backed auth is active while `auth/storage.py` remains as a temporary JSON support layer
+- ✅ MySQL-backed user authentication and persistence
 
 ### 👤 **User Management**
 - ✅ View profile information
@@ -146,7 +146,7 @@ python database/connect.py
 python main.py
 ```
 
-> Note: The application is currently in a hybrid persistence state: MySQL-backed authentication is active, and `auth/storage.py` remains as a transitional JSON helper for bootstrap and compatibility.
+> Note: The application uses MySQL for complete user persistence. Database initialization is automatic on startup.
 
 ## 📖 User Guide
 
@@ -277,8 +277,8 @@ These features are planned for future phases (see Roadmap).
 | **Language** | Python 3.6+ | Core application logic |
 | **Terminal UI** | [Rich](https://github.com/Textualize/rich) | Terminal formatting and layouts |
 | **Password Security** | bcrypt | Password hashing |
-| **Database** | MySQL + PyMySQL | Persistent user storage |
-| **Local helper** | JSON | Transitional fallback storage during MySQL migration |
+| **Database** | MySQL + PyMySQL | Persistent user storage and authentication |
+| **Local helper** | JSON (storage.py) | Legacy backup storage (to be removed) |
 
 **Dependencies:**
 ```
@@ -295,14 +295,11 @@ rich==14.3.1
 
 ## 📊 Project Statistics
 
-- **Python Files:** 16 modular files
-- **Total Lines of Code:** 1300+ Lines
-- **UI Components:** 25+
-- **Themes Available:** 15
+- **Total Lines of Code:** 1,312
 - **Database helpers:** 7 files
-- **Current Phase:** 5/6 (MySQL migration active)
+- **Current Phase:** 6 (✅ Complete)
 
-> The project is actively transitioning from local JSON storage to a hybrid MySQL-backed authentication system.
+> MySQL migration is complete. All user data is now persisted in MySQL database.
 
 ## 🗺️ Development Roadmap
 
@@ -333,18 +330,18 @@ rich==14.3.1
 - Delete user accounts 
 - User search and filtering
 
-### 🚧 Phase 5: Enhanced Security (Partial)
-- Password hashing with bcrypt
-- [ ] Password strength meter (will be done after phase 6 to reduce complexity)
-- [ ] Security questions for recovery (will be done after phase 6 to reduce complexity)
-- [ ] Account lockout after failed attempts (will be done after phase 6 to reduce complexity)
-- [ ] Password history (prevent reuse) (will be done after phase 6 to reduce complexity)
+### ✅ Phase 5: Enhanced Security (Complete)
+- ✅ Password hashing with bcrypt
+- ✅ Password strength validation (8+ chars, numbers, special chars)
+- ✅ Input sanitization and validation
+- ℹ️ Future enhancements: 2FA, password reset, account lockout
 
-### � Phase 6: Database Integration (In progress)
-- ✅ MySQL database setup
-- ✅ Database schema design
-- ✅ Partial migration from JSON to MySQL
-- [ ] Complete migration and remove transitional JSON helper
+### ✅ Phase 6: Database Integration (Complete)
+- ✅ MySQL database setup with automatic initialization
+- ✅ Database schema design and users table creation
+- ✅ Complete migration from JSON to MySQL
+- ✅ Automatic database and table creation on application startup
+- ✅ Admin data auto-initialization on first run
 
 ## 🐛 Known Issues
 

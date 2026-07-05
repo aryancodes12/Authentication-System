@@ -2,9 +2,8 @@ import time, os
 from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
-from rich.progress import track
 from rich.prompt import Prompt
-from .theme import *
+from .theme import PRIMARY, ACCENT, SUCCESS, WARNING, ERROR, INFO, MUTED, HEADER, SUBHEADER, GLOW, RULE, BORDER_ACCENT, BORDER_SUCCESS, BORDER_WARNING, BORDER_ERROR, BORDER_PRIMARY
 
 console = Console()
 
@@ -99,11 +98,6 @@ def warn_panel(msg, title= "WARNING"):
 def status(msg, duration):
     with console.status(f"[{PRIMARY}]{msg}[/{PRIMARY}]", spinner = "dots", ):
         time.sleep(duration)
-
-def fake_loading(msg):
-    for _ in track(range(30), description=f"[{PRIMARY}]{msg}[/{PRIMARY}]"):
-        time.sleep(0.02)
-
 
 #Panel and Rule
 

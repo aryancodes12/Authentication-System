@@ -19,7 +19,6 @@ def update_user_name(old_name, new_name):
 
 
 #Update password of user
-
 def update_user_password(new_password, user_email):
     try:
         conn = cursor = None
