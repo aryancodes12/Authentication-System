@@ -2,6 +2,25 @@
 
 A modular terminal-based authentication system built from scratch in Python with a cyberpunk-themed UI. Designed as a hands-on learning project, it explores real-world authentication, security fundamentals, clean architecture, and backend development concepts.
 
+## 📝 In Simple Words
+
+**What is this project?**
+
+Imagine the login screen you see on websites and apps - where you enter your username and password. This project is like building that from the ground up! 
+
+It's a **sign-up and login system** that:
+- 🔓 Lets you create an account (sign up)
+- 🔐 Lets you log in with your username and password
+- 👤 Shows your account information
+- ✏️ Lets you update your name and password
+- 🗑️ Lets you delete your account if you want
+- 👨‍💼 Has an admin section to manage all users
+
+All of this is displayed in a colorful, glowing terminal interface (inspired by cyberpunk movies). Behind the scenes, it safely stores all your information in a database.
+
+**Who built it?** A student learning how authentication (login systems) actually work behind the scenes.
+
+> 💡 **Note:** This project is actively being improved! Soon, features like email validation using regex (accepting any valid email, not just @gmail.com), better error handling, and enhanced security will be added.
 
 ![Python Version](https://img.shields.io/badge/python-3.6%2B-blue)
 ![Status](https://img.shields.io/badge/status-complete-success)
@@ -396,4 +415,4 @@ This is a personal learning project, but feedback and suggestions are welcome!
 
 Built with 💙 by [Aryan Gupta](https://github.com/aryancodes12) | Learning by Building 🚀
 
-*Last Updated: 2 July 2026 | Phase 6 in progress* 
+*Last Updated: 6 July 2026 | Phase 6 in complete* 
